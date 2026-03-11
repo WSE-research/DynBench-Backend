@@ -21,7 +21,7 @@ from fastapi.responses import RedirectResponse
 
 from startup import LANGUAGES
 
-from core import create_question_query
+from core import create_question_query # , detect_language
 from core import feedback_collection
 
 from startup import call_LLM, LLM_URL, KEY
@@ -113,58 +113,18 @@ class DetectLanguageResponse(BaseModel):
 # lock to prevent multply calls
 transform_lock = threading.Lock()
 
-@app.post("/detect_language")
-def detect_language(request: DetectLanguageRequest) -> DetectLanguageResponse:
-    """Detect the language of a given text using an LLM.
-    Args:
-        request (DetectLanguageRequest): The request body containing text and model.
-    """
-    prompt = f"""Detect the language of the following text.
-Return only the language code (e.g., en, ru, de, fr, es) in a JSON object with key "language_code".
-
-Text: {request.text}"""
-
-    result = call_LLM(
-        url=LLM_URL,
-        key=KEY,
-        model=request.model,
-        prompt=prompt,
-        temp=0.0,
-        max_tokens=10
-    )
+# @app.post("/detect_language")
+# def detect_language_endpoint(request: DetectLanguageRequest) -> DetectLanguageResponse:
+#     """Detect the language of a given text using an LLM.
+#     Args:
+#         request (DetectLanguageRequest): The request body containing text and model.
+#     """
+#     lang_code = detect_language(request.text, request.model)
     
-    if result is None:
-        raise HTTPException(status_code=500, detail="Failed to detect language")
+#     if lang_code is None:
+#         raise HTTPException(status_code=500, detail="Failed to detect language")
     
-    try:
-        response_text = result.get("choices", [{}])[0].get("message", {}).get("content", "")
-        if not response_text:
-            response_text = result.get("text", "")
-        
-        # Extract language code from response
-        import json
-        try:
-            # Try parsing as JSON first
-            parsed = json.loads(response_text)
-            lang_code = parsed.get("language_code", "")
-        except json.JSONDecodeError:
-            # If not JSON, try to extract language code directly
-            lang_code = response_text.strip()
-        
-        # Validate it's a 2-letter language code
-        if len(lang_code) == 2 and lang_code.isalpha():
-            return DetectLanguageResponse(detected_language=lang_code.lower(), confidence=0.95)
-        else:
-            # Fallback: try to match with known languages
-            for code, name in LANGUAGES.items():
-                if lang_code.lower() in name.lower() or name.lower() in lang_code.lower():
-                    return DetectLanguageResponse(detected_language=code, confidence=0.8)
-            
-            raise HTTPException(status_code=400, detail=f"Could not parse valid language code from response: {response_text}")
-    
-    except Exception as e:
-        logger.error(f"Error parsing language detection response: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+#     return DetectLanguageResponse(detected_language=lang_code)
 
 
 @app.post("/transform", response_model=TransformResponse)
