@@ -16,27 +16,32 @@ from utils.sparql import execute as raw_execute
 
 from utils.wikidata import get_wikidata_label
 
-from utils.llm import call_LLM as raw_call_LLM
+# from utils.llm import call_LLM as raw_call_LLM
+
+from openai import OpenAI
 
 
 MONGO_HOST = config('MONGO_HOST')
 MONGO_USER = config('MONGO_USER')
 MONGO_PASS = config('MONGO_PASS')
 
-LLM_URL = config('LLM_URL')
-BASE_URL = LLM_URL.replace('/api/generate', '').replace('/v1/chat/completions', '')
-LLM_MODELS = f'{BASE_URL}/v1/models'
+# LLM_URL = config('LLM_URL')
+# BASE_URL = LLM_URL.replace('/api/generate', '').replace('/v1/chat/completions', '')
+BASE_URL = config('LLM_URL')
+LLM_URL = BASE_URL + '/v1/chat/completions'
+# LLM_MODELS = f'{BASE_URL}/v1/models'
 
 WIKIDATA_AGENT = config('WIKIDATA_AGENT')
 WIKIDATA_ENDPOINT = config('WIKIDATA_ENDPOINT')
 
 KEY = config('KEY')
+# MODEL=config('MODEL')
 
 logger.info(f'Mongo host: {MONGO_HOST}')
-logger.info(f'Mongo user: {MONGO_USER}')
+# logger.info(f'Mongo user: {MONGO_USER}')
 logger.info(f'Wikidata endpoint: {WIKIDATA_ENDPOINT}')
-logger.info(f'Wikidata agent: {WIKIDATA_AGENT}')
-logger.info(f'LLM URL: {BASE_URL}')
+# logger.info(f'Wikidata agent: {WIKIDATA_AGENT}')
+# logger.info(f'LLM URL: {BASE_URL}')
 
 mongo = MongoClient(
     MONGO_HOST,
@@ -47,6 +52,7 @@ mongo = MongoClient(
 db = mongo.dynbench
 cache_collection = db.cache
 feedback_collection = db.feedback
+
 
 # make sure all documents have "order" field
 doc = cache_collection.find_one({ 'order': {"$exists": True} }, sort={ 'order': -1 })
@@ -67,10 +73,24 @@ def execute(query: str, delay=2.0, timeout=30.0,) -> dict | None:
     return raw_execute(query, WIKIDATA_ENDPOINT, WIKIDATA_AGENT, delay=delay, timeout=timeout)
 
 
-@cache.cache(using={'url', 'model', 'prompt', 'temp', 'max_tokens'})
-def call_LLM(url: str, key: str, model: str, prompt, temp: float=0.0, max_tokens: int=1000, timeout=30.0) -> dict | None:
-    return raw_call_LLM(url, key, model, prompt, temp, max_tokens, timeout)
+# @cache.cache(using={'url', 'model', 'prompt', 'temp', 'max_tokens'})
+# def call_LLM(url: str, key: str, model: str, prompt, temp: float=0.0, max_tokens: int=1000, timeout=30.0) -> dict | None:
+#     return raw_call_LLM(url, key, model, prompt, temp, max_tokens, timeout)
         
+client = OpenAI(api_key=KEY)
+if not client:
+    logger.error('Error connecting LLM, exiting...')
+    exit(1)
+
+
+@cache.cache(using={'url', 'model', 'prompt'})
+def call_LLM(url, model, prompt):
+    response = client.responses.create(
+        model=model,
+        input=prompt
+    )
+    return response.output_text
+
 
 def get_label(entity: str, lang: str='en') -> str:
     return get_wikidata_label(entity, execute, lang=lang)
@@ -79,12 +99,12 @@ def get_label(entity: str, lang: str='en') -> str:
 logger.info(f'Cache contains {cache_collection.count_documents({})} records.')
 
 
-try:
-    r = requests.get(BASE_URL)
-    logger.info(f'LLM status (http code): {r.status_code}')
-except:
-    logger.error('Error connecting LLM, exiting...')
-    exit(1)
+# try:
+#     r = requests.get(BASE_URL)
+#     logger.info(f'LLM status (http code): {r.status_code}')
+# except:
+#     logger.error('Error connecting LLM, exiting...')
+#     exit(1)
     
     
 # Load PageRank file into memory

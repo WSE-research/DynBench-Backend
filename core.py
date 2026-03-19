@@ -10,7 +10,7 @@ from utils.wikidata import check_productivity_single, WIKIDATA_PREFIX
 
 from utils.text import count_sentences, calc_levenshtein_dist
 
-from utils.llm import call_LLM
+from startup import call_LLM
 
 
 def detect_language(text: str, model: str) -> str | None:
@@ -32,12 +32,10 @@ def detect_language(text: str, model: str) -> str | None:
 
     result = call_LLM(
         url=LLM_URL,
-        key=KEY,
         model=model,
         prompt=prompt,
-        temp=0.0,
-        max_tokens=10
     )
+    # print("detect language:", result)
 
     if result is None:
         logger.error('Failed to detect language')
@@ -115,7 +113,7 @@ def replace_entity(model: str, question: str, query: str, entity: str, new_entit
     prompt = prompt.format(question=question, old_label=old_label, new_label=new_label, lang=LANGUAGES.get(lang, lang))
 
     logger.debug('Calling LLM to replace entity in question...')
-    new_question = call_LLM(LLM_URL, KEY, model, prompt, temp=0.0, timeout=600)
+    new_question = call_LLM(LLM_URL, model, prompt,)
     try:
         new_question = new_question['response']
         if 'ERROR' in new_question:

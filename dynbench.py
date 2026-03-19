@@ -25,7 +25,7 @@ from startup import LANGUAGES
 from core import create_question_query # , detect_language
 from core import feedback_collection
 
-from startup import BASE_URL
+# from startup import BASE_URL
 
 
 app = FastAPI()
@@ -172,6 +172,7 @@ def transform_endpoint(request: TransformRequest) -> TransformResponse:
         )
             
     try:
+        print('Trying create_question_query ')
         result = create_question_query(
             request.query,
             request.question,
@@ -247,18 +248,18 @@ def health_check():
     return {"status": "healthy"}
 
 
-@app.get("/models")
-def models_endpoint():
-    """Get the list of available models from the LLM API."""
-    models = get_models_list(BASE_URL)
+# @app.get("/models")
+# def models_endpoint():
+#     """Get the list of available models from the LLM API."""
+#     models = get_models_list(BASE_URL)
     
-    if not models:
-        raise HTTPException(
-            status_code=500,
-            detail="Failed to fetch models from the LLM API"
-        )
+#     if not models:
+#         raise HTTPException(
+#             status_code=500,
+#             detail="Failed to fetch models from the LLM API"
+#         )
     
-    return {"models": models}
+#     return {"models": models}
 
 
 if DEBUG:

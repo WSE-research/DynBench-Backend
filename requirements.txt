@@ -8,3 +8,4 @@ rdflib==7.5.0
 Requests==2.32.5
 uvicorn==0.34.0
 pytest==9.0.2
+openai==2.29.0
