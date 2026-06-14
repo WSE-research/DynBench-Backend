@@ -7,6 +7,7 @@ from utils.sparql import (
     execute,
     sparql_results_to_list_of_dicts,
     uri2short,
+    short2uri,
     replace_standard_prefixes,
     remove_standard_prefixes_definition,
     normal_sparql,
@@ -93,6 +94,31 @@ class TestUri2short:
         prefixes = {}
         result = uri2short('http://example.com/resource', prefixes)
         assert result == '<http://example.com/resource>'
+
+
+class TestShort2Uri:
+    def test_short_form_expansion(self):
+        prefixes = {'wd': 'http://www.wikidata.org/entity/'}
+        result = short2uri('wd:Q5', prefixes)
+        assert result == 'http://www.wikidata.org/entity/Q5'
+
+    def test_roundtrip_with_uri2short(self):
+        prefixes = {'wd': 'http://www.wikidata.org/entity/', 'http://www.wikidata.org/entity/': 'wd'}
+        assert short2uri(uri2short('http://www.wikidata.org/entity/Q5', prefixes), prefixes) == 'http://www.wikidata.org/entity/Q5'
+
+    def test_full_uri_is_unchanged(self):
+        result = short2uri('http://www.wikidata.org/entity/Q5', {'wd': 'http://www.wikidata.org/entity/'})
+        assert result == 'http://www.wikidata.org/entity/Q5'
+
+    def test_full_uri_angle_brackets_are_removed(self):
+        result = short2uri('<http://www.wikidata.org/entity/Q5>', {})
+        assert result == 'http://www.wikidata.org/entity/Q5'
+
+    def test_unknown_prefix_is_unchanged(self):
+        assert short2uri('foo:Q5', {'wd': 'http://www.wikidata.org/entity/'}) == 'foo:Q5'
+
+    def test_non_prefixed_string_is_unchanged(self):
+        assert short2uri('Q5', {'wd': 'http://www.wikidata.org/entity/'}) == 'Q5'
 
 
 class TestReplaceStandardPrefixes:

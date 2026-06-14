@@ -1,0 +1,359 @@
+= Entity Substitute Search: Comparison of SPARQL, Sentence-Embedding and RDF2Vec Methods
+:toc: left
+:toclevels: 3
+:sectnums:
+:source-highlighter: rouge
+
+[abstract]
+This document describes an experiment that compares three methods for
+determining substitute entities in the DynBench robust-benchmark pipeline: the
+legacy purely structural *SPARQL* matching, a *sentence-embedding* retrieve-and-rerank
+method, and an *RDF2Vec* graph-embedding retrieve-and-rerank method. All three were
+run on the same 1 000 entities sampled from the bundled benchmarks against the
+public Wikidata endpoint. The sentence-embedding method gives the best candidate
+coverage (90 %), returns compact ranked candidate sets with relevance scores, and
+is faster than RDF2Vec; RDF2Vec is not competitive in this live setting, almost
+entirely because graph-walk extraction over the public endpoint times out for
+large entities. The experiment is descriptive (coverage, agreement, cost, score
+behaviour); it does not score the methods against a ground truth.
+
+== Setting and motivation
+
+=== Context: DynBench robust benchmarks
+
+DynBench generates *robust* variants of question-answering benchmarks (DynQALD,
+DynRuBQ) by transforming the SPARQL query of each benchmark item. One core
+transformation replaces an entity in the query (e.g. `wd:Q14452`, Easter Island)
+with a *substitute* entity that is "of the same kind", producing a new,
+structurally valid item. The quality of these transformations depends directly on
+the quality of the substitute candidates.
+
+=== The substitute-search problem
+
+Given an entity to be replaced and the surrounding query, the substitute search
+has to return a set of candidate entities that:
+
+* are *structurally compatible* — they keep the query productive (satisfy the same
+  type and query conditions), and
+* are *semantically appropriate* — they are genuinely similar to the original
+  entity rather than an arbitrary member of a broad class.
+
+The legacy DynBench implementation solves only the first half with a SPARQL query.
+This experiment evaluates whether embedding-based methods, which add a semantic
+ranking step, are a better basis for the substitute search.
+
+NOTE: The substitute-search code lives in `utils/wikidata.py`
+(`find_substitutes`, `find_substitutes_embedding`, `find_substitutes_rdf2vec`),
+with the embedders in `utils/embeddings.py` and `utils/rdf2vec.py`. The comparison
+harness is `tests/test_method_comparison.py`.
+
+== Goal of the experiment
+
+To compare, on a realistic sample of benchmark entities and against the live
+Wikidata endpoint, how the three methods differ in:
+
+. *Coverage* — for how many entities does the method return at least one substitute?
+. *Selectivity* — how many candidates does it return, and does it attach a relevance score?
+. *Cost* — how long does one substitute search take?
+. *Agreement* — how much do the two ranking methods agree with each other, and how
+  do their top picks relate to the structural candidate pool?
+
+The intended decision is which method should become the default candidate
+determination for the DynBench substitute search.
+
+== The three methods
+
+All methods share the same two-phase *retrieve-and-rerank* skeleton, except the
+legacy SPARQL method, which only retrieves. The retrieval phase (the candidate
+pool) is identical for the two embedding methods; the difference is the *ranking
+signal*.
+
+=== Shared candidate-pool retrieval (retrieve phase)
+
+For the two embedding methods the pool is recall-oriented (`collect_candidate_pool`
+in `utils/wikidata.py`):
+
+* `build_pool_condition_sets` produces several condition sets: the strict legacy
+  combination (all query conditions + the first two `P31`/`P279` *type*
+  conditions), plus each of the first three type conditions *separately* (relaxing
+  the type constraint). Duplicate and empty sets are dropped.
+* For each set, `build_substitutes_query` builds a SPARQL query that selects the
+  most *popular* candidates first, via a subquery ordered by
+  `wikibase:sitelinks` (`LIMIT pool_limit`). If the ordered query returns nothing
+  (it can time out on very large classes) it falls back to an unordered subset.
+* Candidate labels are collected in `en, de, fr, ru, uk` and an English
+  `schema:description` is attached. The semantic filtering is deliberately left to
+  the ranking step.
+
+=== Method 1 — SPARQL (legacy, baseline)
+
+`find_substitutes` — purely *structural* matching. It builds a single SPARQL query
+(`build_substitutes_query` with `get_legacy_conditions`: the query conditions plus
+the first two `P31`/`P279` type conditions, `LIMIT 1000`) and returns *every*
+matching entity, unranked. There is no semantic notion of similarity and no
+relevance score; the result is "all entities that would keep the query valid".
+
+=== Method 2 — Sentence embeddings (text)
+
+`find_substitutes_embedding` — retrieve the shared pool, then *rerank by textual
+similarity*:
+
+* The original entity and every candidate are turned into a canonical text
+  `"label, description"` (`entity_text`).
+* A sentence-transformer model
+  (`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`) encodes the
+  texts into L2-normalised vectors (`SentenceTransformerEmbedder`, lazily loaded,
+  per-text cache).
+* Candidates are ranked by cosine similarity to the original; the `top_k` with
+  similarity `>= min_similarity` are kept.
+* Entities without a usable text representation fall back to the legacy SPARQL search.
+
+=== Method 3 — RDF2Vec (graph)
+
+`find_substitutes_rdf2vec` — retrieve the same pool, then *rerank by graph-structure
+similarity*:
+
+* `RDF2VecEmbedder` (pyRDF2Vec) extracts random walks (`max_depth`, `max_walks`)
+  for the original entity and all pool candidates *directly from the SPARQL
+  endpoint*, and trains a Word2Vec model on the walks (skip-gram `sg=1`,
+  `sample=0` to keep tiny per-request corpora intact, `workers=1`, deterministic
+  `crc32` hash, `vector_size=100`, `epochs=10`).
+* Candidates are ranked by cosine similarity of their graph vectors to the
+  original's; `top_k` with similarity `>= min_similarity` are kept.
+* The Word2Vec model is trained *per call*, so RDF2Vec similarity values are only
+  comparable within a single substitute search (and not comparable to the
+  sentence-embedding cosine scale).
+
+NOTE: pyRDF2Vec needed three patches to work against Wikidata (see
+`utils/rdf2vec.py`): a syntactic URL-liveness check instead of a bare `HEAD`
+expecting HTTP 200; a SPARQL-1.1-protocol connector that does not append `/query`
+to the endpoint; and a descriptive `User-Agent` (Wikimedia rejects requests
+without one).
+
+== Experimental process
+
+=== Data
+
+Entities are sampled by `load_benchmark_entities(n, seed)` from the bundled
+benchmarks:
+
+[cols="2,1,1",options="header"]
+|===
+| Benchmark | Records (with query) | Role
+| `benchmarks/DynQALD.json` | 1 791 | English QALD-derived items
+| `benchmarks/DynRuBQ.json` | 4 011 | Russian RuBQ-derived items
+|===
+
+The combined query list is shuffled with `random.Random(seed)`; entities are then
+collected in shuffled order, taking each query's `wd:Q...` entities until `n`
+*unique* entities are gathered (one representative query per entity). For this
+experiment `n = 1000`, `seed = 42`, which yields exactly 1 000 unique entities.
+
+=== Endpoint and per-method configuration
+
+The run was executed by `test_live_bulk_comparison` in
+`tests/test_method_comparison.py` with these settings:
+
+[cols="2,3",options="header"]
+|===
+| Parameter | Value
+| Endpoint | `https://query.wikidata.org/sparql` (public WDQS)
+| User-Agent | `DynBench/0.1 (... method comparison test)`
+| SPARQL request | `delay = 0.5 s`, `timeout = 20.0 s`, shared in-memory result cache
+| Embedding model | `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, English text
+| Shared `pool_limit` | 20 (kept small to bound runtime; production defaults are 500/50)
+| Embedding ranking | `top_k = 10`, `min_similarity = 0.3`
+| RDF2Vec embedder | `max_depth = 2`, `max_walks = 4`, `vector_size = 100`, `epochs = 10`
+| RDF2Vec ranking | `top_k = 10`, `min_similarity = 0.0`
+| SPARQL (legacy) | `get_legacy_conditions`, `LIMIT 1000`, unranked
+|===
+
+A single shared SPARQL result cache is used for all three methods, so the pool
+queries are not re-issued per method. A single RDF2Vec knowledge-graph object is
+reused across all entities so that fetched graph hops are cached between resources.
+
+=== Per-resource procedure
+
+For each of the 1 000 entities, in order:
+
+. Build the query information (`build_info`): parse the query, fetch the entity's
+  `P31`/`P279` types, derive the type and query conditions.
+. Run `sparql`, `embedding` and `rdf2vec` on that entity, recording for each the
+  number of candidates, the top-10 candidate URIs, the top similarity (if any) and
+  the wall-clock time. Per-method exceptions are caught and recorded as `error`.
+. Append one JSON row to `live_comparison_results.jsonl` and flush, so progress is
+  durable and the run is resumable.
+
+When all entities are processed, `summarize_bulk_comparison` aggregates the rows
+into `live_comparison_summary.json`.
+
+=== Reproducing the run
+
+[source,bash]
+----
+RUN_LIVE_COMPARISON=1 LIVE_COMPARISON_SIZE=1000 LIVE_COMPARISON_SEED=42 \
+    python -m pytest tests/test_method_comparison.py -s -k bulk
+----
+
+Adjustable via environment variables: `LIVE_COMPARISON_SIZE`,
+`LIVE_COMPARISON_SEED`, `LIVE_COMPARISON_POOL_LIMIT`. The harness reads any existing
+`live_comparison_results.jsonl`, skips entities already measured and appends the
+rest, so an interrupted run can simply be relaunched to continue.
+
+== Evaluation
+
+The harness is a *measurement* harness, not a pass/fail gate
+(`summarize_bulk_comparison`). The metrics are deliberately behavioural, because no
+ground-truth substitute set is available:
+
+Per method::
+* *run* — number of resources the method was executed on (1 000);
+* *non-empty* — for how many it returned at least one substitute (coverage);
+* *errors* — number of recorded exceptions;
+* *mean candidates* — average size of the returned candidate set;
+* *mean top similarity* — average similarity of the best candidate (SPARQL has none);
+* *mean seconds* — average wall-clock time per substitute search.
+
+Agreement::
+* *embedding vs rdf2vec* — over the resources where *both* return candidates: the
+  fraction with the same top-1 substitute and the mean Jaccard overlap of the
+  top-10 sets;
+* *embedding/rdf2vec top-1 in sparql top-10* — how often the embedding/RDF2Vec
+  best pick appears in the (unranked) SPARQL candidate listing — a containment
+  proxy, not an accuracy measure.
+
+== Results
+
+Run completed on 2026-06-14 over all 1 000 resources (~15.5 h wall-clock against
+the public endpoint; 0 errors for every method).
+
+.Per-method outcomes (n = 1000)
+[cols="2,1,1,1,1,1",options="header"]
+|===
+| Method | Run | Non-empty (coverage) | Mean candidates | Mean top sim. | Mean sec
+| *embedding* | 1000 | *902 (90 %)* | 19.6 | *0.61* | 36.5
+| sparql | 1000 | 871 (87 %) | 172.1 | — (unranked) | 1.5
+| rdf2vec | 1000 | 519 (52 %) | 4.2 | 0.44 | 46.0
+|===
+
+.Agreement / containment
+[cols="3,1",options="header"]
+|===
+| Metric | Value
+| embedding vs rdf2vec — resources both non-empty | 475
+| embedding vs rdf2vec — top-1 agreement | 0.112
+| embedding vs rdf2vec — mean Jaccard@10 | 0.548
+| embedding top-1 in sparql candidate list | 0.312
+| rdf2vec top-1 in sparql candidate list | 0.224
+|===
+
+.Coverage co-occurrence and cost
+[cols="3,1",options="header"]
+|===
+| Observation | Value
+| Resources where embedding fired but RDF2Vec did not | 427
+| Resources where all three returned nothing | 21
+| RDF2Vec empty results | 481
+| ... of which the call still took >= 15 s (timeout signature) | 449 (93 %)
+| Mean total wall-clock per resource (all three) | 84.0 s
+|===
+
+== Discussion
+
+*Coverage.* The sentence-embedding method has the best coverage (90 %), slightly
+above the legacy SPARQL method (87 %) because the relaxed, recall-oriented pool can
+find candidates even when the strict legacy condition set is empty, while the text
+ranking still filters them. RDF2Vec covers only 52 %.
+
+*Why RDF2Vec under-covers.* The 481 RDF2Vec empties are not ranking failures: 0
+errors were logged, the candidate pool existed (the embedding method succeeded on
+427 of the same resources), and 449/481 (93 %) of the empties still consumed
+>= 15 s. The signature is *graph-walk extraction timing out* against the public
+endpoint for large entities (e.g. countries such as `wd:Q16`, `wd:Q159`), with the
+small live walk budget (`max_depth=2`, `max_walks=4`) and `pool_limit=20`. This is
+a *feasibility* result about RDF2Vec over a remote endpoint, not a verdict on
+RDF2Vec embedding quality in general.
+
+*Selectivity.* SPARQL returns large unranked sets (mean 172 candidates) with no way
+to prefer one over another. The embedding method returns compact ranked sets
+(mean ~20, capped at `top_k=10` per language) each with a cosine relevance score —
+exactly the selectivity the substitute transformation needs.
+
+*Agreement.* The two embedding methods rarely pick the same best substitute
+(top-1 agreement 0.11) but their top-10 sets overlap moderately (mean
+Jaccard 0.55). They draw from the same pool but rank it by different notions of
+similarity — textual description vs graph neighbourhood — so they capture
+complementary signals. The low containment of either method's top pick in the
+SPARQL listing (0.31 / 0.22) mostly reflects that the SPARQL listing is unordered
+and capped, so it is a weak reference rather than evidence of wrong picks.
+
+*Cost.* SPARQL is effectively free (1.5 s). The embedding method adds ~37 s,
+dominated by pool retrieval and a one-off model load; RDF2Vec is the slowest
+(46 s) because of remote walk extraction.
+
+== Limitations
+
+. *No ground truth.* The comparison is behavioural (coverage, set sizes, agreement,
+  score behaviour, cost). It does not measure precision/recall against gold
+  substitutes; "top-1 in SPARQL candidate list" is a containment proxy, not an
+  accuracy metric. A human or downstream task-based evaluation of substitute
+  quality is future work.
+. *RDF2Vec configuration is live-constrained.* Small walk budget
+  (`depth 2`, `walks 4`), `pool_limit=20` and a 20 s SPARQL timeout were chosen to
+  keep the run feasible; a local/materialised KG or precomputed embeddings would
+  likely change the RDF2Vec coverage substantially.
+. *Similarity scales are not comparable* across methods (sentence cosine vs
+  per-call Word2Vec cosine). The "mean top similarity" column is descriptive only.
+. *Single model / single text language.* Only one multilingual sentence model and
+  English text were used; entities without an English text representation fall back
+  to the SPARQL method, which slightly inflates the embedding method's coverage in
+  a way that depends on the model/language choice.
+. *Live-endpoint variability.* Rate limits, latency and transient failures on the
+  public WDQS affect coverage and timing; with the 0.5 s delay / 20 s timeout the
+  run is not bit-for-bit reproducible.
+. *Reduced pool size.* `pool_limit=20` is far below the production defaults
+  (500 for embeddings, 50 for RDF2Vec); absolute candidate counts would be higher
+  in production.
+. *Operational notes.* The run spanned ~15.5 h with two interruptions and was
+  continued via the resume mechanism; one duplicate row arose from an accidental
+  second worker and was removed (dedup by entity, keeping the first occurrence).
+
+== Conclusions
+
+. *Adopt the sentence-embedding method as the default substitute candidate
+  determination.* It has the best coverage (90 %), returns compact ranked candidate
+  sets with usable relevance scores, and runs in a reasonable ~37 s — directly
+  filling the gap left by the legacy SPARQL method.
+. *Keep SPARQL as a fast fallback.* It is instant and broad but provides no
+  ranking or relevance signal, so it is unsuitable as the primary method but useful
+  when no text representation exists.
+. *RDF2Vec is not competitive over the live endpoint.* Its ~48 % empty rate is
+  driven by walk-extraction timeouts, not embedding quality. It would only be worth
+  revisiting with a local/materialised knowledge graph or precomputed graph
+  embeddings.
+. *Textual and structural similarity are complementary* (low top-1 agreement,
+  moderate set overlap), which leaves room for a future hybrid ranking — but on the
+  current live infrastructure the text-embedding method is the clear, practical
+  choice.
+
+== Artifacts
+
+This experiment's outputs are archived next to this document in
+`experiments/embeddings/`. Paths to source files below are relative to the
+repository root.
+
+[cols="2,3",options="header"]
+|===
+| File | Contents
+| `experiments/embeddings/entity_comparison_experiment.adoc` | this document
+| `experiments/embeddings/live_comparison_results.jsonl` | 1 000 per-resource rows (one JSON object per entity)
+| `experiments/embeddings/live_comparison_summary.json` | aggregated summary (the result tables above)
+| `tests/test_method_comparison.py` | comparison harness (`test_live_bulk_comparison`, `summarize_bulk_comparison`)
+| `utils/wikidata.py` | the three substitute-search functions and pool retrieval
+| `utils/embeddings.py` | sentence-transformer embedder and ranking helpers
+| `utils/rdf2vec.py` | pyRDF2Vec embedder (with the Wikidata patches)
+|===
+
+NOTE: The harness writes its outputs (`live_comparison_results.jsonl`,
+`live_comparison_summary.json`) to the working directory (the repository root) when
+run; the files above are the archived copies of the 2026-06-14 run.

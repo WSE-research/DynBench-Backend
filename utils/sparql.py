@@ -113,6 +113,34 @@ def uri2short(resource: str, prefixes) -> str:
         return resource
     
 
+def short2uri(resource: str, prefixes) -> str:
+    """
+    Convert a short form like 'wd:Q5' into the full URI, e.g.
+    'http://www.wikidata.org/entity/Q5'. Inverse of uri2short.
+
+    Args:
+        resource: Short or full URI of the resource. Returned unchanged
+            (without angle brackets) if it is already a full URI.
+        prefixes: Dictionary mapping prefixes to namespace URIs.
+    Returns:
+        Full URI of the resource, or the original resource if its prefix is unknown.
+    """
+    if not isinstance(resource, str):
+        raise TypeError('Resource must be a string')
+
+    resource = resource.strip()
+
+    if '/' in resource:
+        # already a full URI: only remove angle brackets if present
+        return resource[int(resource.startswith('<')):-int(resource.endswith('>')) or None]
+
+    prefix, _, entity = resource.partition(':')
+    if entity and prefixes and prefix in prefixes:
+        return f'{prefixes[prefix]}{entity}'
+
+    return resource
+
+
 def replace_standard_prefixes(query: str, prefixes: dict=None) -> str:
     """
     Replace all full URIs in the query with their corresponding short forms using the provided prefixes.

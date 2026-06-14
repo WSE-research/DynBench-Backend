@@ -1,0 +1,49 @@
+@prefix ex: <http://example.org/> .
+
+# Two clearly separated clusters: Nordic countries and Pacific islands.
+# Entities within a cluster share most of their graph neighborhood (including
+# the predicates), so RDF2Vec must embed them closer to each other than to
+# entities of the other cluster.
+
+ex:Finland ex:countryType ex:Country ;
+    ex:inContinent ex:Europe ;
+    ex:memberOf ex:NordicCouncil ;
+    ex:languageFamily ex:Uralic ;
+    ex:winter ex:Cold ;
+    ex:capital ex:Helsinki .
+
+ex:Sweden ex:countryType ex:Country ;
+    ex:inContinent ex:Europe ;
+    ex:memberOf ex:NordicCouncil ;
+    ex:languageFamily ex:NorthGermanic ;
+    ex:winter ex:Cold ;
+    ex:capital ex:Stockholm .
+
+ex:Norway ex:countryType ex:Country ;
+    ex:inContinent ex:Europe ;
+    ex:memberOf ex:NordicCouncil ;
+    ex:languageFamily ex:NorthGermanic ;
+    ex:winter ex:Cold ;
+    ex:capital ex:Oslo .
+
+ex:EasterIsland ex:islandType ex:Island ;
+    ex:inOcean ex:Pacific ;
+    ex:archipelago ex:Polynesia ;
+    ex:reachedBy ex:Boat ;
+    ex:summer ex:Warm ;
+    ex:mainTown ex:HangaRoa .
+
+ex:Pitcairn ex:islandType ex:Island ;
+    ex:inOcean ex:Pacific ;
+    ex:archipelago ex:Polynesia ;
+    ex:reachedBy ex:Boat ;
+    ex:summer ex:Warm ;
+    ex:mainTown ex:Adamstown .
+
+# second-hop structure, also disjoint between the clusters
+ex:Europe ex:hasUnion ex:EU .
+ex:NordicCouncil ex:foundedIn ex:Copenhagen .
+ex:Country ex:governedBy ex:Government .
+ex:Pacific ex:hasCurrent ex:HumboldtCurrent .
+ex:Polynesia ex:settledBy ex:Polynesians .
+ex:Island ex:surroundedBy ex:Water .

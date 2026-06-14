@@ -6,6 +6,7 @@ from utils.sparql import get_conditions_by_predicates, get_query_conditions
 from utils.sparql import normal_sparql, parse_query, extract_entities
 
 from utils.wikidata import get_resources_types, find_substitutes
+from utils.wikidata import find_substitutes_embedding, find_substitutes_rdf2vec
 from utils.wikidata import check_productivity_single, WIKIDATA_PREFIX
 
 from utils.text import count_sentences, calc_levenshtein_dist
@@ -156,10 +157,10 @@ def build_pagerank_list(substitutes: list) -> list:
 def sort_replaces_by_complexity(replaces, complexity):
     """
     Sort or shuffle the replaces list based on the complexity level.
-    
+
     Args:
         replaces: List of tuples (original_pagerank, new_pagerank, replace_dict).
-        complexity: One of 'easy', 'normal', 'hard', or 'random'.
+        complexity: One of 'easy', 'normal', 'hard', 'random', or 'similar'.
     Returns:
         Sorted or shuffled list of replaces.
     Raises:
@@ -175,8 +176,11 @@ def sort_replaces_by_complexity(replaces, complexity):
         shuffled = replaces.copy()
         random.shuffle(shuffled)
         return shuffled
+    elif complexity == 'similar':
+        # most similar substitutes first (similarity is only set by the embedding-based searches)
+        return sorted(replaces, key=lambda x: x[2].get('similarity', 0.0), reverse=True)
     else:
-        raise ValueError(f'Complexity can only be easy/normal/hard/random. Got: {complexity}')
+        raise ValueError(f'Complexity can only be easy/normal/hard/random/similar. Got: {complexity}')
  
 
 def get_info(query: str) -> dict:
@@ -217,8 +221,28 @@ def get_info(query: str) -> dict:
     logger.debug(f'Extracted query conditions.')
 
     # Find possible substitutes for each entity in the query
-    info['substitutes'] = find_substitutes(query, execute, info)
-    logger.debug(f'Extracted substitutes for entities.')
+    if SUBSTITUTE_METHOD == 'embedding' and embedder is not None:
+        info['substitutes'] = find_substitutes_embedding(
+            query, execute, info, embedder,
+            embedding_lang=EMBEDDING_LANG,
+            pool_limit=EMBEDDING_POOL_LIMIT,
+            top_k=EMBEDDING_TOP_K,
+            min_similarity=EMBEDDING_MIN_SIMILARITY,
+            max_type_conditions=EMBEDDING_MAX_TYPE_CONDITIONS,
+        )
+        logger.debug(f'Extracted substitutes for entities (embedding-based).')
+    elif SUBSTITUTE_METHOD == 'rdf2vec' and embedder is not None:
+        info['substitutes'] = find_substitutes_rdf2vec(
+            query, execute, info, embedder,
+            pool_limit=RDF2VEC_POOL_LIMIT,
+            top_k=EMBEDDING_TOP_K,
+            min_similarity=RDF2VEC_MIN_SIMILARITY,
+            max_type_conditions=EMBEDDING_MAX_TYPE_CONDITIONS,
+        )
+        logger.debug(f'Extracted substitutes for entities (RDF2Vec-based).')
+    else:
+        info['substitutes'] = find_substitutes(query, execute, info)
+        logger.debug(f'Extracted substitutes for entities (SPARQL-based).')
 
     # Flatten all substitution results and track the original entity
     all_replaces = []
@@ -232,11 +256,16 @@ def get_info(query: str) -> dict:
     for u in unic_replaces:
         u['new'] = u.pop('subst')
 
-    # Add language-specific labels for each substitution
+    # Add language-specific labels and embedding similarity for each substitution
     for r in unic_replaces:
         for a in all_replaces:
             if a['old'] == r['old'] and a['subst'] == r['new']:
                 r[a['lang']] = { 'label': a['label'] }
+                if 'similarity' in a:
+                    r['similarity'] = a['similarity']
+
+    # Most similar substitutes first (the set-based deduplication has no stable order)
+    unic_replaces.sort(key=lambda r: r.get('similarity', 0.0), reverse=True)
 
     # Update substitutes with deduplicated and enriched data
     info['substitutes'] = unic_replaces
@@ -321,6 +350,8 @@ def create_question_query(query: str, question: str, model: str, lang: str, comp
             'New entity PageRank': new_pagerank,
             'Status': 'in progress'
         }
+        if 'similarity' in replace:
+            attempt['Similarity'] = replace['similarity']
 
         old_label = get_label(replace['old'], lang=lang)
         logger.info(f"Label for {replace['old']}: {old_label}")
@@ -413,7 +444,8 @@ def create_question_query(query: str, question: str, model: str, lang: str, comp
                 'old_label': old_label,
                 'new_label': new_label,
                 'old_pagerank': old_pagerank,
-                'new_pagerank': new_pagerank
+                'new_pagerank': new_pagerank,
+                'similarity': replace.get('similarity')
             }
 
             return {
@@ -421,6 +453,7 @@ def create_question_query(query: str, question: str, model: str, lang: str, comp
                 'transformed_query': new_query,
                 'old_pagerank': old_pagerank,
                 'new_pagerank': new_pagerank,
+                'similarity': replace.get('similarity'),
                 'extra': extra
             }
         

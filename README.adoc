@@ -24,12 +24,45 @@ toc::[]
 == Features
 
 * **Multi-language Support**: Handles questions in English, German, French, Russian, and Ukrainian
-* **Complexity Levels**: Generates variations at different difficulty levels (easy, normal, hard, random)
+* **Embedding-based Substitute Search**: Identifies semantically similar entities by embedding similarity (with the previous purely SPARQL-based search as configurable alternative)
+* **Complexity Levels**: Generates variations at different difficulty levels (easy, normal, hard, random, similar)
 * **LLM Integration**: Uses an LLM to rephrase questions after entity replacement
 * **PageRank Scoring**: Ranks substitutes based on entity popularity
 * **REST API**: Exposes `/transform` endpoint for batch processing
 * **Knowledge Graph**: Uses (only) the Wikidata Knowledge Graph to find semantically similar entities
 * **MongoDB Caching**: Caches SPARQL results for performance
+
+== Substitute Search
+
+To replace an entity in a question/query pair, DynBench first determines candidate entities. Three methods are available (configured via `SUBSTITUTE_METHOD`):
+
+* `embedding` (default): A retrieve-and-rerank approach. A recall-oriented candidate pool is retrieved with relaxed SPARQL queries (the query conditions combined with each of the first type conditions of the original entity separately, next to the strict legacy combination). The candidates are then ranked by the cosine similarity between sentence embeddings of their textual representation (label plus description) and the one of the original entity. Only the `EMBEDDING_TOP_K` candidates with a similarity of at least `EMBEDDING_MIN_SIMILARITY` are kept. This makes the substitute identification robust against incomplete or inconsistent typing in the knowledge graph and avoids semantically arbitrary replacements: substitutes are similar resources instead of an arbitrary subset of structurally compatible ones.
+* `rdf2vec`: The same retrieve-and-rerank approach, but with *graph* embeddings from https://github.com/predict-idlab/pyRDF2Vec[pyRDF2Vec]: random walks are extracted for the original entity and all pool candidates directly from the SPARQL endpoint, a Word2Vec model is trained on them, and the candidates are ranked by the cosine similarity of the resulting entity vectors. Similarity is therefore based on the knowledge graph *structure* (shared neighborhoods) instead of textual descriptions — language-independent and usable for entities without descriptions, but blind to information that is only in the text. The Word2Vec model is trained per request, so similarity values are only comparable within one response and are scaled differently than the sentence embedding ones (`RDF2VEC_MIN_SIMILARITY` defaults to `0.0`).
+* `sparql`: The previous, purely structural approach. Substitutes have to share the first two type (`wdt:P31`/`wdt:P279`) conditions of the original entity and satisfy the query conditions; the first 1000 matches are used without semantic ranking.
+
+The selected substitutes are afterwards ordered by the requested complexity (based on PageRank, or by similarity for the `similar` complexity), checked for productivity, and verified by a round-trip transformation — identically for all methods. The sentence embedding model (default: a multilingual https://www.sbert.net/[sentence-transformers] model covering all supported languages) is downloaded on first use and runs locally; the achieved similarity is reported in the `/transform` response (`similarity` field).
+
+=== Notes on the RDF2Vec method
+
+* **Installation**: pyRDF2Vec 0.2.3 declares outdated dependency pins (`torch<2.0`, `numpy<2.0`, `rdflib` 6.x) that its code never imports and that conflict with this service. Install it without its declared dependencies (the actually required ones are pinned in link:./requirements-rdf2vec.txt[requirements-rdf2vec.txt]):
++
+[source,bash]
+----
+pip install -r requirements-rdf2vec.txt
+pip install --no-deps pyrdf2vec==0.2.3
+----
+* **Endpoint load**: pyRDF2Vec extracts walks by querying the SPARQL endpoint directly (bypassing the MongoDB cache and without request throttling). Every pool candidate costs additional requests, which is why `RDF2VEC_POOL_LIMIT` defaults to a small value (50). For bulk generation, prefer a local Wikidata endpoint over the public one.
+* **Endpoint compatibility**: pyRDF2Vec appends `/query` to the endpoint URL and sends no `User-Agent` header — both unsupported by the Wikidata endpoint. `utils/rdf2vec.py` therefore replaces its connector with a SPARQL 1.1 protocol-compliant one that sends the configured `WIKIDATA_AGENT`.
+* **Event loop**: importing pyRDF2Vec applies `nest_asyncio`, which is incompatible with `uvloop`. Run uvicorn with the default asyncio loop (the default with this project's requirements) when using `rdf2vec`.
+
+=== Comparing the methods
+
+link:./tests/test_method_comparison.py[tests/test_method_comparison.py] compares the three methods on a shared scenario: the mock-based tests verify that all methods are drop-in compatible and that both embedding methods rank/filter semantically (while the structural method does not), and an offline integration test runs the real pyRDF2Vec library on a small local graph. A live three-way comparison against the public Wikidata endpoint (printing the ranked substitutes of each method side by side) is started with:
+
+[source,bash]
+----
+RUN_LIVE_COMPARISON=1 python3 -m pytest tests/test_method_comparison.py -s -k live
+----
 
 == Environment Variables
 
@@ -39,11 +72,27 @@ Required in `.env`:
 * LLM service credentials: `LLM_URL`, `KEY` (empty string for local instance)
 * Wikidata SPARQL endpoint: `WIKIDATA_ENDPOINT`, `WIKIDATA_AGENT` (agent string is empty for the basic endpoint)
 
+Optional (defaults shown in link:./.env.template[.env.template]):
+
+* `SUBSTITUTE_METHOD`: `embedding` (default), `rdf2vec` or `sparql`, see <<Substitute Search>>
+* `EMBEDDING_MODEL`: sentence-transformers model used for the similarity ranking (default: `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`)
+* `EMBEDDING_LANG`: language of the embedded texts (default: `en`)
+* `EMBEDDING_TOP_K`: maximum number of substitutes kept per entity, for both embedding methods (default: `50`)
+* `EMBEDDING_MIN_SIMILARITY`: minimum cosine similarity of a substitute (default: `0.3`)
+* `EMBEDDING_POOL_LIMIT`: maximum number of rows per candidate pool query (default: `500`)
+* `EMBEDDING_MAX_TYPE_CONDITIONS`: number of type conditions queried separately for the pool, for both embedding methods (default: `3`)
+* `RDF2VEC_MAX_DEPTH`: maximum depth of the random walks in hops (default: `2`)
+* `RDF2VEC_MAX_WALKS`: maximum number of walks per entity (default: `10`)
+* `RDF2VEC_EPOCHS`: number of Word2Vec training epochs (default: `10`)
+* `RDF2VEC_VECTOR_SIZE`: dimensionality of the RDF2Vec entity vectors (default: `100`)
+* `RDF2VEC_POOL_LIMIT`: maximum number of rows per candidate pool query for `rdf2vec` (default: `50`, see <<Notes on the RDF2Vec method>>)
+* `RDF2VEC_MIN_SIMILARITY`: minimum cosine similarity of a substitute for `rdf2vec` (default: `0.0`)
+
 A sample `.env` file is provided in the root directory. Copy it to `.env` and fill in the missing values.
 
 == Setup
 
-DynBench uses the PageRank of Wikidata URIs (provided on the https://danker.s3.amazonaws.com/index.html page) and the NLTK library. The PageRank file is 19 MB in size.
+DynBench uses the PageRank of Wikidata URIs (provided on the https://danker.s3.amazonaws.com/index.html page) and the NLTK library. The embedding-based substitute search additionally uses a https://www.sbert.net/[sentence-transformers] model that is downloaded automatically from Hugging Face on its first use (about 470 MB for the default multilingual model); the model runs locally, no GPU is required. The PageRank file is 19 MB in size.
 
 == Usage
 
@@ -69,7 +118,16 @@ python3 dynbench.py \
   --model "mistral-small:latest"
 ----
 
-==== Start uvicorn webservice 
+==== Demonstrate the embedding-based substitute search
+
+link:./demo_embedding_substitutes.py[demo_embedding_substitutes.py] runs the candidate determination (without LLM rewriting) for a few benchmark records against the public Wikidata endpoint and prints the ranked substitutes. It requires neither MongoDB nor an LLM service:
+
+[source,bash]
+----
+python3 demo_embedding_substitutes.py
+----
+
+==== Start uvicorn webservice
 
 [source,bash]
 ----

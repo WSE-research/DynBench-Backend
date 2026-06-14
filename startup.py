@@ -16,6 +16,10 @@ from utils.sparql import execute as raw_execute
 
 from utils.wikidata import get_wikidata_label
 
+from utils.embeddings import embeddings_available, SentenceTransformerEmbedder
+
+from utils.rdf2vec import rdf2vec_available, RDF2VecEmbedder
+
 # from utils.llm import call_LLM as raw_call_LLM
 
 from openai import OpenAI
@@ -161,4 +165,57 @@ for k, v in list(LANGUAGES.items()):
     LANGUAGES[v] = k
 
 PREDICATES = ('wdt:P31', 'wdt:P279', )
+
+
+# Substitute search method: 'embedding' (sentence embedding similarity, default),
+# 'rdf2vec' (graph embedding similarity) or 'sparql' (structural matching)
+SUBSTITUTE_METHOD = config('SUBSTITUTE_METHOD', default='embedding').strip().lower()
+
+EMBEDDING_MODEL = config('EMBEDDING_MODEL', default='sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')
+EMBEDDING_LANG = config('EMBEDDING_LANG', default='en')
+EMBEDDING_TOP_K = config('EMBEDDING_TOP_K', default=50, cast=int)
+EMBEDDING_MIN_SIMILARITY = config('EMBEDDING_MIN_SIMILARITY', default=0.3, cast=float)
+EMBEDDING_POOL_LIMIT = config('EMBEDDING_POOL_LIMIT', default=500, cast=int)
+EMBEDDING_MAX_TYPE_CONDITIONS = config('EMBEDDING_MAX_TYPE_CONDITIONS', default=3, cast=int)
+
+RDF2VEC_MAX_DEPTH = config('RDF2VEC_MAX_DEPTH', default=2, cast=int)
+RDF2VEC_MAX_WALKS = config('RDF2VEC_MAX_WALKS', default=10, cast=int)
+RDF2VEC_EPOCHS = config('RDF2VEC_EPOCHS', default=10, cast=int)
+RDF2VEC_VECTOR_SIZE = config('RDF2VEC_VECTOR_SIZE', default=100, cast=int)
+# small pool: every pool candidate costs additional SPARQL requests during walk extraction
+RDF2VEC_POOL_LIMIT = config('RDF2VEC_POOL_LIMIT', default=50, cast=int)
+# Word2Vec cosine similarities are scaled differently than sentence embedding ones
+RDF2VEC_MIN_SIMILARITY = config('RDF2VEC_MIN_SIMILARITY', default=0.0, cast=float)
+
+if SUBSTITUTE_METHOD not in ('embedding', 'rdf2vec', 'sparql'):
+    logger.warning(f'Unknown SUBSTITUTE_METHOD "{SUBSTITUTE_METHOD}", falling back to "sparql".')
+    SUBSTITUTE_METHOD = 'sparql'
+
+embedder = None
+if SUBSTITUTE_METHOD == 'embedding':
+    if embeddings_available():
+        # the model itself is loaded lazily on the first transformation
+        embedder = SentenceTransformerEmbedder(EMBEDDING_MODEL)
+        logger.info(f'Substitute search: embedding-based (model: {EMBEDDING_MODEL}).')
+    else:
+        logger.error('sentence-transformers is not installed, falling back to SPARQL-based substitute search.')
+        SUBSTITUTE_METHOD = 'sparql'
+elif SUBSTITUTE_METHOD == 'rdf2vec':
+    if rdf2vec_available():
+        # pyRDF2Vec itself is loaded lazily on the first transformation
+        embedder = RDF2VecEmbedder(
+            WIKIDATA_ENDPOINT,
+            max_depth=RDF2VEC_MAX_DEPTH,
+            max_walks=RDF2VEC_MAX_WALKS,
+            epochs=RDF2VEC_EPOCHS,
+            vector_size=RDF2VEC_VECTOR_SIZE,
+            **({ 'agent': WIKIDATA_AGENT } if WIKIDATA_AGENT else {}),
+        )
+        logger.info(f'Substitute search: RDF2Vec-based (endpoint: {WIKIDATA_ENDPOINT}).')
+    else:
+        logger.error('pyrdf2vec/gensim is not installed, falling back to SPARQL-based substitute search.')
+        SUBSTITUTE_METHOD = 'sparql'
+
+if SUBSTITUTE_METHOD == 'sparql':
+    logger.info('Substitute search: SPARQL-based.')
 

@@ -208,3 +208,9 @@ __marimo__/
 
 # Data files
 pagerank/
+# bulk live comparison outputs (transient, written to the repo root on each run)
+live_comparison_results.jsonl
+live_comparison_summary.json
+# but keep the archived run committed under experiments/
+!experiments/embeddings/live_comparison_results.jsonl
+!experiments/embeddings/live_comparison_summary.json

@@ -1,0 +1,38 @@
+{
+  "resources": 1000,
+  "methods": {
+    "sparql": {
+      "run": 1000,
+      "non-empty": 871,
+      "errors": 0,
+      "mean candidates": 172.1,
+      "mean top similarity": null,
+      "mean seconds": 1.5
+    },
+    "embedding": {
+      "run": 1000,
+      "non-empty": 902,
+      "errors": 0,
+      "mean candidates": 19.6,
+      "mean top similarity": 0.61,
+      "mean seconds": 36.5
+    },
+    "rdf2vec": {
+      "run": 1000,
+      "non-empty": 519,
+      "errors": 0,
+      "mean candidates": 4.2,
+      "mean top similarity": 0.44,
+      "mean seconds": 46.0
+    }
+  },
+  "agreement": {
+    "embedding vs rdf2vec": {
+      "resources": 475,
+      "top-1 agreement": 0.112,
+      "mean jaccard@10": 0.548
+    },
+    "embedding top-1 in sparql top-10": 0.312,
+    "rdf2vec top-1 in sparql top-10": 0.224
+  }
+}

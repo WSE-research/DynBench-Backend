@@ -1,5 +1,5 @@
-# Use lightweight Python base image
-FROM python:3.12-alpine
+# Use lightweight Python base image (slim instead of alpine: PyTorch provides no musl wheels)
+FROM python:3.12-slim
 
 # Set work directory
 WORKDIR /app
@@ -11,8 +11,15 @@ COPY pagerank/allwiki.rank /app/pagerank/
 # Copy requirement file first (to leverage Docker layer caching)
 COPY requirements.txt .
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies (CPU-only PyTorch wheels keep the image small)
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu \
+ && pip install --no-cache-dir -r requirements.txt
+
+# Optional RDF2Vec substitute search (pyRDF2Vec is installed without its outdated
+# declared dependencies, see requirements-rdf2vec.txt)
+COPY requirements-rdf2vec.txt .
+RUN pip install --no-cache-dir -r requirements-rdf2vec.txt \
+ && pip install --no-cache-dir --no-deps pyrdf2vec==0.2.3
 
 # Download NLTK punkt modules
 RUN python -m nltk.downloader punkt punkt_tab

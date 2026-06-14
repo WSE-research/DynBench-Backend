@@ -157,7 +157,9 @@ class MongoCache:
 
                 # Call function and cache result
                 result = func(*args, **kwargs)
-                self.set(key, result, policy)
+                # None signals a failed call (e.g., endpoint timeout) and must not be cached
+                if result is not None:
+                    self.set(key, result, policy)
 
                 return result
 

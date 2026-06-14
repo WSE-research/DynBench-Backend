@@ -46,9 +46,9 @@ def main():
     parser.add_argument(
         '-c', '--complexity',
         type=str,
-        choices=['easy', 'normal', 'hard', 'random'],
+        choices=['easy', 'normal', 'hard', 'random', 'similar'],
         default='normal',
-        help='The complexity level: easy, normal, or hard (default: normal)'
+        help='The complexity level: easy, normal, hard, random, or similar (default: normal)'
     )
 
     args = parser.parse_args()
@@ -71,6 +71,8 @@ def main():
     logger.info(f'Transformed Query: {result["transformed_query"]}')
     logger.info(f'Old PageRank: {result["old_pagerank"]}')
     logger.info(f'New PageRank: {result["new_pagerank"]}')
+    if result.get('similarity') is not None:
+        logger.info(f'Similarity: {result["similarity"]:.4f}')
 
 
 app = FastAPI()
@@ -92,6 +94,7 @@ class TransformResponse(BaseModel):
     transformed_query: str | None
     old_pagerank: float | None
     new_pagerank: float | None
+    similarity: float | None = None
     extra: dict | None = None
 
 
@@ -161,10 +164,10 @@ def transform_endpoint(request: TransformRequest) -> TransformResponse:
             detail=f"Unsupported language: {request.lang} (supported: {', '.join(LANGUAGES.keys())})"
         )
     
-    if request.complexity not in ['easy', 'normal', 'hard', 'random']:
+    if request.complexity not in ['easy', 'normal', 'hard', 'random', 'similar']:
         raise HTTPException(
-            status_code=400, 
-            detail=f"Invalid complexity: {request.complexity} (supported: easy, normal, hard, random)"
+            status_code=400,
+            detail=f"Invalid complexity: {request.complexity} (supported: easy, normal, hard, random, similar)"
         )
     
     if request.model not in models_list:
