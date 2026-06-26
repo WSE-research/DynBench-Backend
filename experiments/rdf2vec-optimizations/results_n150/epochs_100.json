@@ -1,0 +1,5490 @@
+{
+  "summary": {
+    "config": "epochs_100",
+    "mode": "per_request",
+    "repeats": 5,
+    "items": 150,
+    "MRR_mean": 0.251,
+    "MRR_std": 0.023,
+    "MRR_min": 0.226,
+    "MRR_max": 0.295,
+    "Hits@1": 0.117,
+    "Hits@3": 0.256,
+    "Hits@5": 0.363,
+    "Hits@10": 0.581,
+    "coverage": 0.993,
+    "random_MRR": 0.183,
+    "random_Hits@5": 0.261,
+    "mean_candidates": 27.6,
+    "seconds": 6663.5
+  },
+  "config": {
+    "mode": "per_request",
+    "walker": "random",
+    "sampler": "uniform",
+    "max_depth": 2,
+    "max_walks": 100,
+    "vector_size": 100,
+    "epochs": 100,
+    "window": 5,
+    "sg": 1,
+    "min_count": 1,
+    "negative": 5
+  },
+  "per_repeat_metrics": [
+    {
+      "MRR": 0.24722684894850394,
+      "Hits@1": 0.11333333333333333,
+      "Hits@3": 0.24666666666666667,
+      "Hits@5": 0.36666666666666664,
+      "Hits@10": 0.6,
+      "coverage": 0.9933333333333333
+    },
+    {
+      "MRR": 0.2950088348212501,
+      "Hits@1": 0.17333333333333334,
+      "Hits@3": 0.30666666666666664,
+      "Hits@5": 0.38666666666666666,
+      "Hits@10": 0.5866666666666667,
+      "coverage": 0.9933333333333333
+    },
+    {
+      "MRR": 0.24101512103714176,
+      "Hits@1": 0.10666666666666667,
+      "Hits@3": 0.23333333333333334,
+      "Hits@5": 0.3466666666666667,
+      "Hits@10": 0.5733333333333334,
+      "coverage": 0.9933333333333333
+    },
+    {
+      "MRR": 0.24616818738826624,
+      "Hits@1": 0.1,
+      "Hits@3": 0.26,
+      "Hits@5": 0.37333333333333335,
+      "Hits@10": 0.6066666666666667,
+      "coverage": 0.9933333333333333
+    },
+    {
+      "MRR": 0.22625170220230803,
+      "Hits@1": 0.09333333333333334,
+      "Hits@3": 0.23333333333333334,
+      "Hits@5": 0.34,
+      "Hits@10": 0.54,
+      "coverage": 0.9933333333333333
+    }
+  ],
+  "per_item_mean": [
+    {
+      "id": "test:6679",
+      "mean_rr": 0.33999999999999997,
+      "n_candidates": 28,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:132",
+      "mean_rr": 0.26755336167100874,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:6547",
+      "mean_rr": 0.07976836888601595,
+      "n_candidates": 24,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:3117",
+      "mean_rr": 0.20151515151515148,
+      "n_candidates": 11,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6719",
+      "mean_rr": 0.058773352251613134,
+      "n_candidates": 53,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6595",
+      "mean_rr": 0.6181818181818182,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:326",
+      "mean_rr": 0.34395604395604396,
+      "n_candidates": 23,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:623",
+      "mean_rr": 0.5111111111111111,
+      "n_candidates": 27,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6593",
+      "mean_rr": 0.148859649122807,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:2039",
+      "mean_rr": 0.29318181818181815,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:120",
+      "mean_rr": 0.08818828230592937,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:396",
+      "mean_rr": 0.09825,
+      "n_candidates": 76,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6311",
+      "mean_rr": 0.46352941176470586,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6425",
+      "mean_rr": 0.2769119769119769,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:736",
+      "mean_rr": 0.28111111111111114,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:128",
+      "mean_rr": 0.71,
+      "n_candidates": 43,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:155",
+      "mean_rr": 0.07169661733615221,
+      "n_candidates": 69,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:754",
+      "mean_rr": 0.032806637806637805,
+      "n_candidates": 41,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:687",
+      "mean_rr": 0.13305252135836843,
+      "n_candidates": 57,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6819",
+      "mean_rr": 0.3869047619047619,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:190",
+      "mean_rr": 0.33200280112044817,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:187",
+      "mean_rr": 0.12069403714565005,
+      "n_candidates": 33,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:3029",
+      "mean_rr": 0.03978956228956229,
+      "n_candidates": 66,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:6083",
+      "mean_rr": 0.36136363636363633,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6280",
+      "mean_rr": 0.9,
+      "n_candidates": 7,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:334",
+      "mean_rr": 0.5181818181818182,
+      "n_candidates": 12,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:115",
+      "mean_rr": 0.0234735987696514,
+      "n_candidates": 66,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6578",
+      "mean_rr": 0.12583184789067142,
+      "n_candidates": 38,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:84",
+      "mean_rr": 0.5,
+      "n_candidates": 3,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:2078",
+      "mean_rr": 0.13999999999999999,
+      "n_candidates": 12,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:413",
+      "mean_rr": 0.1869047619047619,
+      "n_candidates": 8,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6632",
+      "mean_rr": 0.14213786213786211,
+      "n_candidates": 16,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:68",
+      "mean_rr": 0.25595238095238093,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6541",
+      "mean_rr": 0.14651515151515151,
+      "n_candidates": 16,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:232",
+      "mean_rr": 0.45,
+      "n_candidates": 20,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6908",
+      "mean_rr": 0.13118548118548118,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:6945",
+      "mean_rr": 0.8666666666666666,
+      "n_candidates": 26,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:7082",
+      "mean_rr": 0.030028860028860026,
+      "n_candidates": 36,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:247",
+      "mean_rr": 0.17033613445378148,
+      "n_candidates": 21,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:212",
+      "mean_rr": 0.0491410344041923,
+      "n_candidates": 29,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6076",
+      "mean_rr": 0.19093137254901962,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:62",
+      "mean_rr": 0.1117929292929293,
+      "n_candidates": 21,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:245",
+      "mean_rr": 0.16827264239028944,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6229",
+      "mean_rr": 0.1910714285714286,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:279",
+      "mean_rr": 0.10222222222222221,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:6234",
+      "mean_rr": 0.19951159951159952,
+      "n_candidates": 33,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:70",
+      "mean_rr": 0.22371794871794867,
+      "n_candidates": 13,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:3055",
+      "mean_rr": 0.58,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:47",
+      "mean_rr": 0.3869047619047619,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:252",
+      "mean_rr": 0.3981818181818182,
+      "n_candidates": 16,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:708",
+      "mean_rr": 0.07893503555268261,
+      "n_candidates": 22,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:151",
+      "mean_rr": 0.10851795263559968,
+      "n_candidates": 24,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6214",
+      "mean_rr": 0.16023809523809524,
+      "n_candidates": 15,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6276",
+      "mean_rr": 0.08992745512581354,
+      "n_candidates": 48,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:1",
+      "mean_rr": 0.0865079365079365,
+      "n_candidates": 21,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:7142",
+      "mean_rr": 0.2785714285714286,
+      "n_candidates": 10,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:24",
+      "mean_rr": 0.21166666666666667,
+      "n_candidates": 24,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:314",
+      "mean_rr": 0.28478057889822594,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:581",
+      "mean_rr": 0.016760935255475735,
+      "n_candidates": 66,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:835",
+      "mean_rr": 0.10982905982905984,
+      "n_candidates": 57,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:6646",
+      "mean_rr": 0.16493506493506493,
+      "n_candidates": 28,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:394",
+      "mean_rr": 0.06732026143790851,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:284",
+      "mean_rr": 0.48769230769230765,
+      "n_candidates": 31,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:107",
+      "mean_rr": 0.15523809523809523,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:1009",
+      "mean_rr": 0.18047619047619048,
+      "n_candidates": 23,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:321",
+      "mean_rr": 0.15607142857142856,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6688",
+      "mean_rr": 0.23008658008658003,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:172",
+      "mean_rr": 0.525,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6869",
+      "mean_rr": 0.16426373626373628,
+      "n_candidates": 26,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:144",
+      "mean_rr": 0.133003663003663,
+      "n_candidates": 15,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:381",
+      "mean_rr": 0.0903327922077922,
+      "n_candidates": 69,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:261",
+      "mean_rr": 0.1396969696969697,
+      "n_candidates": 12,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:465",
+      "mean_rr": 0.21222222222222223,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:237",
+      "mean_rr": 0.7285714285714285,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:154",
+      "mean_rr": 0.03496756783521489,
+      "n_candidates": 52,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:374",
+      "mean_rr": 0.046347716799329704,
+      "n_candidates": 35,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6433",
+      "mean_rr": 0.024803736542866977,
+      "n_candidates": 46,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:836",
+      "mean_rr": 0.5553846153846154,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:3059",
+      "mean_rr": 0.13,
+      "n_candidates": 16,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:45",
+      "mean_rr": 0.06341991341991342,
+      "n_candidates": 29,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:742",
+      "mean_rr": 0.13326118326118325,
+      "n_candidates": 14,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:166",
+      "mean_rr": 0.30666666666666664,
+      "n_candidates": 6,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6131",
+      "mean_rr": 0.27055555555555555,
+      "n_candidates": 49,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:174",
+      "mean_rr": 0.2684126984126984,
+      "n_candidates": 66,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:6769",
+      "mean_rr": 0.0709313725490196,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:150",
+      "mean_rr": 0.02865833039746083,
+      "n_candidates": 57,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:223",
+      "mean_rr": 0.19833333333333333,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:218",
+      "mean_rr": 0.7,
+      "n_candidates": 3,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:156",
+      "mean_rr": 0.5,
+      "n_candidates": 8,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:473",
+      "mean_rr": 0.34455128205128205,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:592",
+      "mean_rr": 0.16055555555555556,
+      "n_candidates": 15,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:412",
+      "mean_rr": 0.15857142857142859,
+      "n_candidates": 14,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:196",
+      "mean_rr": 0.6,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:471",
+      "mean_rr": 1.0,
+      "n_candidates": 1,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:355",
+      "mean_rr": 0.41558061821219716,
+      "n_candidates": 66,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:3136",
+      "mean_rr": 0.14818181818181816,
+      "n_candidates": 20,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:516",
+      "mean_rr": 0.0,
+      "n_candidates": 49,
+      "found_frac": 0.0
+    },
+    {
+      "id": "train:399",
+      "mean_rr": 0.4442322383498854,
+      "n_candidates": 30,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6783",
+      "mean_rr": 0.1965151515151515,
+      "n_candidates": 14,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6019",
+      "mean_rr": 0.15246753246753247,
+      "n_candidates": 15,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6097",
+      "mean_rr": 0.048826173826173824,
+      "n_candidates": 37,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:2091",
+      "mean_rr": 0.25666666666666665,
+      "n_candidates": 16,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6389",
+      "mean_rr": 0.2737373737373737,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6128",
+      "mean_rr": 0.1244047619047619,
+      "n_candidates": 16,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:103",
+      "mean_rr": 0.020039223353893007,
+      "n_candidates": 57,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:85",
+      "mean_rr": 0.2853846153846154,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:40",
+      "mean_rr": 0.06447802197802197,
+      "n_candidates": 51,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:788",
+      "mean_rr": 0.08035214785214786,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6789",
+      "mean_rr": 0.10333979745744451,
+      "n_candidates": 21,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:7127",
+      "mean_rr": 0.45984848484848484,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6039",
+      "mean_rr": 0.024581408034912076,
+      "n_candidates": 60,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:184",
+      "mean_rr": 0.3702380952380952,
+      "n_candidates": 12,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:7148",
+      "mean_rr": 0.4509401709401709,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:83",
+      "mean_rr": 0.45,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:174",
+      "mean_rr": 0.0412688460964323,
+      "n_candidates": 41,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6864",
+      "mean_rr": 0.5619047619047619,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:349",
+      "mean_rr": 0.18023809523809523,
+      "n_candidates": 25,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:139",
+      "mean_rr": 0.11111111111111112,
+      "n_candidates": 47,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:3048",
+      "mean_rr": 0.1350815850815851,
+      "n_candidates": 19,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6530",
+      "mean_rr": 0.10436507936507936,
+      "n_candidates": 20,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6468",
+      "mean_rr": 0.15839262187088274,
+      "n_candidates": 24,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:7094",
+      "mean_rr": 0.10795739348370928,
+      "n_candidates": 31,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:207",
+      "mean_rr": 0.022557275590427493,
+      "n_candidates": 47,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:3003",
+      "mean_rr": 0.025408432147562582,
+      "n_candidates": 74,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6049",
+      "mean_rr": 0.42333333333333334,
+      "n_candidates": 6,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:101",
+      "mean_rr": 0.2816666666666666,
+      "n_candidates": 12,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:6303",
+      "mean_rr": 0.037456687456687454,
+      "n_candidates": 41,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:864",
+      "mean_rr": 0.041334623814649044,
+      "n_candidates": 62,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:10",
+      "mean_rr": 0.15388888888888888,
+      "n_candidates": 34,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6716",
+      "mean_rr": 0.0730415783047362,
+      "n_candidates": 34,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:639",
+      "mean_rr": 0.30246753246753244,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:750",
+      "mean_rr": 0.015057270962284389,
+      "n_candidates": 97,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:405",
+      "mean_rr": 0.49523809523809514,
+      "n_candidates": 15,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:330",
+      "mean_rr": 0.11401515151515151,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:13",
+      "mean_rr": 0.08232306255835668,
+      "n_candidates": 42,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:622",
+      "mean_rr": 0.13866946778711484,
+      "n_candidates": 20,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:164",
+      "mean_rr": 1.0,
+      "n_candidates": 16,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:19",
+      "mean_rr": 0.3333333333333333,
+      "n_candidates": 17,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:772",
+      "mean_rr": 0.17928571428571427,
+      "n_candidates": 14,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:140",
+      "mean_rr": 0.20586080586080585,
+      "n_candidates": 32,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:6090",
+      "mean_rr": 0.13964285714285712,
+      "n_candidates": 18,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:249",
+      "mean_rr": 0.44761904761904764,
+      "n_candidates": 21,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:850",
+      "mean_rr": 0.07168149796069707,
+      "n_candidates": 59,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:6617",
+      "mean_rr": 0.14174825174825173,
+      "n_candidates": 23,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:79",
+      "mean_rr": 0.30666666666666664,
+      "n_candidates": 63,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:720",
+      "mean_rr": 0.5517647058823529,
+      "n_candidates": 25,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:7029",
+      "mean_rr": 1.0,
+      "n_candidates": 26,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:747",
+      "mean_rr": 0.85,
+      "n_candidates": 15,
+      "found_frac": 1.0
+    },
+    {
+      "id": "test:275",
+      "mean_rr": 0.08590124504810412,
+      "n_candidates": 66,
+      "found_frac": 1.0
+    },
+    {
+      "id": "train:91",
+      "mean_rr": 0.47579365079365077,
+      "n_candidates": 14,
+      "found_frac": 1.0
+    }
+  ],
+  "per_repeat": [
+    [
+      {
+        "id": "test:6679",
+        "gold_rank": 2,
+        "n_ranked": 28,
+        "n_candidates": 28
+      },
+      {
+        "id": "test:132",
+        "gold_rank": 17,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:6547",
+        "gold_rank": 15,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:3117",
+        "gold_rank": 4,
+        "n_ranked": 11,
+        "n_candidates": 11
+      },
+      {
+        "id": "test:6719",
+        "gold_rank": 23,
+        "n_ranked": 53,
+        "n_candidates": 53
+      },
+      {
+        "id": "test:6595",
+        "gold_rank": 2,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:326",
+        "gold_rank": 1,
+        "n_ranked": 23,
+        "n_candidates": 23
+      },
+      {
+        "id": "train:623",
+        "gold_rank": 1,
+        "n_ranked": 27,
+        "n_candidates": 27
+      },
+      {
+        "id": "test:6593",
+        "gold_rank": 4,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:2039",
+        "gold_rank": 8,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:120",
+        "gold_rank": 11,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:396",
+        "gold_rank": 5,
+        "n_ranked": 76,
+        "n_candidates": 76
+      },
+      {
+        "id": "test:6311",
+        "gold_rank": 17,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6425",
+        "gold_rank": 11,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:736",
+        "gold_rank": 8,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:128",
+        "gold_rank": 1,
+        "n_ranked": 43,
+        "n_candidates": 43
+      },
+      {
+        "id": "train:155",
+        "gold_rank": 6,
+        "n_ranked": 69,
+        "n_candidates": 69
+      },
+      {
+        "id": "test:754",
+        "gold_rank": 36,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:687",
+        "gold_rank": 23,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "test:6819",
+        "gold_rank": 3,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:190",
+        "gold_rank": 3,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:187",
+        "gold_rank": 5,
+        "n_ranked": 33,
+        "n_candidates": 33
+      },
+      {
+        "id": "test:3029",
+        "gold_rank": 48,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:6083",
+        "gold_rank": 11,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6280",
+        "gold_rank": 1,
+        "n_ranked": 7,
+        "n_candidates": 7
+      },
+      {
+        "id": "train:334",
+        "gold_rank": 2,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "test:115",
+        "gold_rank": 28,
+        "n_ranked": 65,
+        "n_candidates": 66
+      },
+      {
+        "id": "test:6578",
+        "gold_rank": 33,
+        "n_ranked": 38,
+        "n_candidates": 38
+      },
+      {
+        "id": "test:84",
+        "gold_rank": 3,
+        "n_ranked": 3,
+        "n_candidates": 3
+      },
+      {
+        "id": "test:2078",
+        "gold_rank": 10,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:413",
+        "gold_rank": 7,
+        "n_ranked": 8,
+        "n_candidates": 8
+      },
+      {
+        "id": "test:6632",
+        "gold_rank": 11,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:68",
+        "gold_rank": 2,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6541",
+        "gold_rank": 10,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:232",
+        "gold_rank": 3,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:6908",
+        "gold_rank": 14,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:6945",
+        "gold_rank": 1,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "test:7082",
+        "gold_rank": 33,
+        "n_ranked": 36,
+        "n_candidates": 36
+      },
+      {
+        "id": "train:247",
+        "gold_rank": 4,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:212",
+        "gold_rank": 19,
+        "n_ranked": 28,
+        "n_candidates": 29
+      },
+      {
+        "id": "test:6076",
+        "gold_rank": 16,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:62",
+        "gold_rank": 10,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "train:245",
+        "gold_rank": 9,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6229",
+        "gold_rank": 3,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:279",
+        "gold_rank": 9,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:6234",
+        "gold_rank": 6,
+        "n_ranked": 33,
+        "n_candidates": 33
+      },
+      {
+        "id": "train:70",
+        "gold_rank": 3,
+        "n_ranked": 13,
+        "n_candidates": 13
+      },
+      {
+        "id": "test:3055",
+        "gold_rank": 1,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:47",
+        "gold_rank": 8,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:252",
+        "gold_rank": 5,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:708",
+        "gold_rank": 16,
+        "n_ranked": 22,
+        "n_candidates": 22
+      },
+      {
+        "id": "test:151",
+        "gold_rank": 22,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:6214",
+        "gold_rank": 8,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:6276",
+        "gold_rank": 34,
+        "n_ranked": 47,
+        "n_candidates": 48
+      },
+      {
+        "id": "test:1",
+        "gold_rank": 8,
+        "n_ranked": 20,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:7142",
+        "gold_rank": 7,
+        "n_ranked": 10,
+        "n_candidates": 10
+      },
+      {
+        "id": "train:24",
+        "gold_rank": 4,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "train:314",
+        "gold_rank": 7,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:581",
+        "gold_rank": 58,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:835",
+        "gold_rank": 15,
+        "n_ranked": 56,
+        "n_candidates": 57
+      },
+      {
+        "id": "train:6646",
+        "gold_rank": 11,
+        "n_ranked": 28,
+        "n_candidates": 28
+      },
+      {
+        "id": "test:394",
+        "gold_rank": 18,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:284",
+        "gold_rank": 1,
+        "n_ranked": 31,
+        "n_candidates": 31
+      },
+      {
+        "id": "train:107",
+        "gold_rank": 6,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:1009",
+        "gold_rank": 4,
+        "n_ranked": 22,
+        "n_candidates": 23
+      },
+      {
+        "id": "train:321",
+        "gold_rank": 8,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:6688",
+        "gold_rank": 2,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:172",
+        "gold_rank": 1,
+        "n_ranked": 16,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6869",
+        "gold_rank": 7,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "train:144",
+        "gold_rank": 4,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:381",
+        "gold_rank": 55,
+        "n_ranked": 69,
+        "n_candidates": 69
+      },
+      {
+        "id": "train:261",
+        "gold_rank": 11,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:465",
+        "gold_rank": 9,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:237",
+        "gold_rank": 2,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:154",
+        "gold_rank": 27,
+        "n_ranked": 52,
+        "n_candidates": 52
+      },
+      {
+        "id": "test:374",
+        "gold_rank": 35,
+        "n_ranked": 35,
+        "n_candidates": 35
+      },
+      {
+        "id": "test:6433",
+        "gold_rank": 46,
+        "n_ranked": 46,
+        "n_candidates": 46
+      },
+      {
+        "id": "test:836",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:3059",
+        "gold_rank": 15,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:45",
+        "gold_rank": 22,
+        "n_ranked": 29,
+        "n_candidates": 29
+      },
+      {
+        "id": "test:742",
+        "gold_rank": 7,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "test:166",
+        "gold_rank": 4,
+        "n_ranked": 5,
+        "n_candidates": 6
+      },
+      {
+        "id": "test:6131",
+        "gold_rank": 36,
+        "n_ranked": 49,
+        "n_candidates": 49
+      },
+      {
+        "id": "train:174",
+        "gold_rank": 7,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:6769",
+        "gold_rank": 17,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:150",
+        "gold_rank": 46,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "train:223",
+        "gold_rank": 6,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:218",
+        "gold_rank": 2,
+        "n_ranked": 3,
+        "n_candidates": 3
+      },
+      {
+        "id": "train:156",
+        "gold_rank": 2,
+        "n_ranked": 8,
+        "n_candidates": 8
+      },
+      {
+        "id": "test:473",
+        "gold_rank": 16,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:592",
+        "gold_rank": 6,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:412",
+        "gold_rank": 8,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "train:196",
+        "gold_rank": 2,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:471",
+        "gold_rank": 1,
+        "n_ranked": 1,
+        "n_candidates": 1
+      },
+      {
+        "id": "test:355",
+        "gold_rank": 1,
+        "n_ranked": 65,
+        "n_candidates": 66
+      },
+      {
+        "id": "test:3136",
+        "gold_rank": 4,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:516",
+        "gold_rank": null,
+        "n_ranked": 0,
+        "n_candidates": 49
+      },
+      {
+        "id": "train:399",
+        "gold_rank": 11,
+        "n_ranked": 30,
+        "n_candidates": 30
+      },
+      {
+        "id": "test:6783",
+        "gold_rank": 11,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "test:6019",
+        "gold_rank": 14,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:6097",
+        "gold_rank": 21,
+        "n_ranked": 37,
+        "n_candidates": 37
+      },
+      {
+        "id": "train:2091",
+        "gold_rank": 4,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:6389",
+        "gold_rank": 9,
+        "n_ranked": 16,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6128",
+        "gold_rank": 14,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:103",
+        "gold_rank": 47,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "test:85",
+        "gold_rank": 8,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:40",
+        "gold_rank": 15,
+        "n_ranked": 49,
+        "n_candidates": 51
+      },
+      {
+        "id": "test:788",
+        "gold_rank": 14,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6789",
+        "gold_rank": 14,
+        "n_ranked": 20,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:7127",
+        "gold_rank": 11,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6039",
+        "gold_rank": 28,
+        "n_ranked": 60,
+        "n_candidates": 60
+      },
+      {
+        "id": "train:184",
+        "gold_rank": 3,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "test:7148",
+        "gold_rank": 13,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:83",
+        "gold_rank": 3,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:174",
+        "gold_rank": 29,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:6864",
+        "gold_rank": 3,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:349",
+        "gold_rank": 8,
+        "n_ranked": 24,
+        "n_candidates": 25
+      },
+      {
+        "id": "test:139",
+        "gold_rank": 9,
+        "n_ranked": 47,
+        "n_candidates": 47
+      },
+      {
+        "id": "train:3048",
+        "gold_rank": 4,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6530",
+        "gold_rank": 7,
+        "n_ranked": 19,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:6468",
+        "gold_rank": 11,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:7094",
+        "gold_rank": 19,
+        "n_ranked": 31,
+        "n_candidates": 31
+      },
+      {
+        "id": "test:207",
+        "gold_rank": 45,
+        "n_ranked": 47,
+        "n_candidates": 47
+      },
+      {
+        "id": "test:3003",
+        "gold_rank": 42,
+        "n_ranked": 72,
+        "n_candidates": 74
+      },
+      {
+        "id": "test:6049",
+        "gold_rank": 4,
+        "n_ranked": 6,
+        "n_candidates": 6
+      },
+      {
+        "id": "test:101",
+        "gold_rank": 5,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:6303",
+        "gold_rank": 39,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:864",
+        "gold_rank": 39,
+        "n_ranked": 62,
+        "n_candidates": 62
+      },
+      {
+        "id": "train:10",
+        "gold_rank": 9,
+        "n_ranked": 34,
+        "n_candidates": 34
+      },
+      {
+        "id": "test:6716",
+        "gold_rank": 21,
+        "n_ranked": 34,
+        "n_candidates": 34
+      },
+      {
+        "id": "test:639",
+        "gold_rank": 11,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:750",
+        "gold_rank": 67,
+        "n_ranked": 94,
+        "n_candidates": 97
+      },
+      {
+        "id": "train:405",
+        "gold_rank": 3,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:330",
+        "gold_rank": 10,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:13",
+        "gold_rank": 9,
+        "n_ranked": 42,
+        "n_candidates": 42
+      },
+      {
+        "id": "test:622",
+        "gold_rank": 5,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:164",
+        "gold_rank": 1,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:19",
+        "gold_rank": 3,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:772",
+        "gold_rank": 8,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "train:140",
+        "gold_rank": 13,
+        "n_ranked": 30,
+        "n_candidates": 32
+      },
+      {
+        "id": "test:6090",
+        "gold_rank": 7,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:249",
+        "gold_rank": 1,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:850",
+        "gold_rank": 8,
+        "n_ranked": 59,
+        "n_candidates": 59
+      },
+      {
+        "id": "train:6617",
+        "gold_rank": 4,
+        "n_ranked": 23,
+        "n_candidates": 23
+      },
+      {
+        "id": "test:79",
+        "gold_rank": 5,
+        "n_ranked": 63,
+        "n_candidates": 63
+      },
+      {
+        "id": "train:720",
+        "gold_rank": 1,
+        "n_ranked": 25,
+        "n_candidates": 25
+      },
+      {
+        "id": "test:7029",
+        "gold_rank": 1,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "test:747",
+        "gold_rank": 1,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:275",
+        "gold_rank": 16,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:91",
+        "gold_rank": 1,
+        "n_ranked": 14,
+        "n_candidates": 14
+      }
+    ],
+    [
+      {
+        "id": "test:6679",
+        "gold_rank": 5,
+        "n_ranked": 28,
+        "n_candidates": 28
+      },
+      {
+        "id": "test:132",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:6547",
+        "gold_rank": 8,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:3117",
+        "gold_rank": 6,
+        "n_ranked": 11,
+        "n_candidates": 11
+      },
+      {
+        "id": "test:6719",
+        "gold_rank": 12,
+        "n_ranked": 53,
+        "n_candidates": 53
+      },
+      {
+        "id": "test:6595",
+        "gold_rank": 1,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:326",
+        "gold_rank": 7,
+        "n_ranked": 23,
+        "n_candidates": 23
+      },
+      {
+        "id": "train:623",
+        "gold_rank": 2,
+        "n_ranked": 27,
+        "n_candidates": 27
+      },
+      {
+        "id": "test:6593",
+        "gold_rank": 15,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:2039",
+        "gold_rank": 11,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:120",
+        "gold_rank": 14,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:396",
+        "gold_rank": 32,
+        "n_ranked": 76,
+        "n_candidates": 76
+      },
+      {
+        "id": "test:6311",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6425",
+        "gold_rank": 9,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:736",
+        "gold_rank": 1,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:128",
+        "gold_rank": 1,
+        "n_ranked": 43,
+        "n_candidates": 43
+      },
+      {
+        "id": "train:155",
+        "gold_rank": 43,
+        "n_ranked": 69,
+        "n_candidates": 69
+      },
+      {
+        "id": "test:754",
+        "gold_rank": 28,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:687",
+        "gold_rank": 3,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "test:6819",
+        "gold_rank": 7,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:190",
+        "gold_rank": 1,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:187",
+        "gold_rank": 33,
+        "n_ranked": 33,
+        "n_candidates": 33
+      },
+      {
+        "id": "test:3029",
+        "gold_rank": 54,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:6083",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6280",
+        "gold_rank": 1,
+        "n_ranked": 7,
+        "n_candidates": 7
+      },
+      {
+        "id": "train:334",
+        "gold_rank": 1,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "test:115",
+        "gold_rank": 55,
+        "n_ranked": 65,
+        "n_candidates": 66
+      },
+      {
+        "id": "test:6578",
+        "gold_rank": 34,
+        "n_ranked": 38,
+        "n_candidates": 38
+      },
+      {
+        "id": "test:84",
+        "gold_rank": 3,
+        "n_ranked": 3,
+        "n_candidates": 3
+      },
+      {
+        "id": "test:2078",
+        "gold_rank": 12,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:413",
+        "gold_rank": 6,
+        "n_ranked": 8,
+        "n_candidates": 8
+      },
+      {
+        "id": "test:6632",
+        "gold_rank": 7,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:68",
+        "gold_rank": 8,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6541",
+        "gold_rank": 11,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:232",
+        "gold_rank": 3,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:6908",
+        "gold_rank": 4,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:6945",
+        "gold_rank": 1,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "test:7082",
+        "gold_rank": 36,
+        "n_ranked": 36,
+        "n_candidates": 36
+      },
+      {
+        "id": "train:247",
+        "gold_rank": 17,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:212",
+        "gold_rank": 22,
+        "n_ranked": 28,
+        "n_candidates": 29
+      },
+      {
+        "id": "test:6076",
+        "gold_rank": 2,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:62",
+        "gold_rank": 11,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "train:245",
+        "gold_rank": 14,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6229",
+        "gold_rank": 7,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:279",
+        "gold_rank": 15,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:6234",
+        "gold_rank": 13,
+        "n_ranked": 33,
+        "n_candidates": 33
+      },
+      {
+        "id": "train:70",
+        "gold_rank": 4,
+        "n_ranked": 13,
+        "n_candidates": 13
+      },
+      {
+        "id": "test:3055",
+        "gold_rank": 5,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:47",
+        "gold_rank": 1,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:252",
+        "gold_rank": 2,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:708",
+        "gold_rank": 14,
+        "n_ranked": 22,
+        "n_candidates": 22
+      },
+      {
+        "id": "test:151",
+        "gold_rank": 7,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:6214",
+        "gold_rank": 7,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:6276",
+        "gold_rank": 33,
+        "n_ranked": 47,
+        "n_candidates": 48
+      },
+      {
+        "id": "test:1",
+        "gold_rank": 18,
+        "n_ranked": 20,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:7142",
+        "gold_rank": 3,
+        "n_ranked": 10,
+        "n_candidates": 10
+      },
+      {
+        "id": "train:24",
+        "gold_rank": 10,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "train:314",
+        "gold_rank": 9,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:581",
+        "gold_rank": 58,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:835",
+        "gold_rank": 18,
+        "n_ranked": 56,
+        "n_candidates": 57
+      },
+      {
+        "id": "train:6646",
+        "gold_rank": 14,
+        "n_ranked": 28,
+        "n_candidates": 28
+      },
+      {
+        "id": "test:394",
+        "gold_rank": 9,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:284",
+        "gold_rank": 5,
+        "n_ranked": 31,
+        "n_candidates": 31
+      },
+      {
+        "id": "train:107",
+        "gold_rank": 7,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:1009",
+        "gold_rank": 7,
+        "n_ranked": 22,
+        "n_candidates": 23
+      },
+      {
+        "id": "train:321",
+        "gold_rank": 4,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:6688",
+        "gold_rank": 7,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:172",
+        "gold_rank": 2,
+        "n_ranked": 16,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6869",
+        "gold_rank": 25,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "train:144",
+        "gold_rank": 13,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:381",
+        "gold_rank": 15,
+        "n_ranked": 69,
+        "n_candidates": 69
+      },
+      {
+        "id": "train:261",
+        "gold_rank": 12,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:465",
+        "gold_rank": 4,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:237",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:154",
+        "gold_rank": 44,
+        "n_ranked": 52,
+        "n_candidates": 52
+      },
+      {
+        "id": "test:374",
+        "gold_rank": 25,
+        "n_ranked": 35,
+        "n_candidates": 35
+      },
+      {
+        "id": "test:6433",
+        "gold_rank": 44,
+        "n_ranked": 46,
+        "n_candidates": 46
+      },
+      {
+        "id": "test:836",
+        "gold_rank": 13,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:3059",
+        "gold_rank": 3,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:45",
+        "gold_rank": 24,
+        "n_ranked": 29,
+        "n_candidates": 29
+      },
+      {
+        "id": "test:742",
+        "gold_rank": 14,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "test:166",
+        "gold_rank": 2,
+        "n_ranked": 5,
+        "n_candidates": 6
+      },
+      {
+        "id": "test:6131",
+        "gold_rank": 1,
+        "n_ranked": 49,
+        "n_candidates": 49
+      },
+      {
+        "id": "train:174",
+        "gold_rank": 12,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:6769",
+        "gold_rank": 15,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:150",
+        "gold_rank": 39,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "train:223",
+        "gold_rank": 8,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:218",
+        "gold_rank": 1,
+        "n_ranked": 3,
+        "n_candidates": 3
+      },
+      {
+        "id": "train:156",
+        "gold_rank": 2,
+        "n_ranked": 8,
+        "n_candidates": 8
+      },
+      {
+        "id": "test:473",
+        "gold_rank": 2,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:592",
+        "gold_rank": 9,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:412",
+        "gold_rank": 5,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "train:196",
+        "gold_rank": 2,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:471",
+        "gold_rank": 1,
+        "n_ranked": 1,
+        "n_candidates": 1
+      },
+      {
+        "id": "test:355",
+        "gold_rank": 38,
+        "n_ranked": 65,
+        "n_candidates": 66
+      },
+      {
+        "id": "test:3136",
+        "gold_rank": 10,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:516",
+        "gold_rank": null,
+        "n_ranked": 0,
+        "n_candidates": 49
+      },
+      {
+        "id": "train:399",
+        "gold_rank": 1,
+        "n_ranked": 30,
+        "n_candidates": 30
+      },
+      {
+        "id": "test:6783",
+        "gold_rank": 8,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "test:6019",
+        "gold_rank": 11,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:6097",
+        "gold_rank": 33,
+        "n_ranked": 37,
+        "n_candidates": 37
+      },
+      {
+        "id": "train:2091",
+        "gold_rank": 4,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:6389",
+        "gold_rank": 10,
+        "n_ranked": 16,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6128",
+        "gold_rank": 6,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:103",
+        "gold_rank": 54,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "test:85",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:40",
+        "gold_rank": 26,
+        "n_ranked": 49,
+        "n_candidates": 51
+      },
+      {
+        "id": "test:788",
+        "gold_rank": 13,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6789",
+        "gold_rank": 7,
+        "n_ranked": 20,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:7127",
+        "gold_rank": 1,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6039",
+        "gold_rank": 49,
+        "n_ranked": 60,
+        "n_candidates": 60
+      },
+      {
+        "id": "train:184",
+        "gold_rank": 1,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "test:7148",
+        "gold_rank": 1,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:83",
+        "gold_rank": 1,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:174",
+        "gold_rank": 22,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:6864",
+        "gold_rank": 1,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:349",
+        "gold_rank": 3,
+        "n_ranked": 24,
+        "n_candidates": 25
+      },
+      {
+        "id": "test:139",
+        "gold_rank": 9,
+        "n_ranked": 47,
+        "n_candidates": 47
+      },
+      {
+        "id": "train:3048",
+        "gold_rank": 11,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6530",
+        "gold_rank": 14,
+        "n_ranked": 19,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:6468",
+        "gold_rank": 2,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:7094",
+        "gold_rank": 4,
+        "n_ranked": 31,
+        "n_candidates": 31
+      },
+      {
+        "id": "test:207",
+        "gold_rank": 45,
+        "n_ranked": 47,
+        "n_candidates": 47
+      },
+      {
+        "id": "test:3003",
+        "gold_rank": 33,
+        "n_ranked": 72,
+        "n_candidates": 74
+      },
+      {
+        "id": "test:6049",
+        "gold_rank": 5,
+        "n_ranked": 6,
+        "n_candidates": 6
+      },
+      {
+        "id": "test:101",
+        "gold_rank": 3,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:6303",
+        "gold_rank": 12,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:864",
+        "gold_rank": 32,
+        "n_ranked": 62,
+        "n_candidates": 62
+      },
+      {
+        "id": "train:10",
+        "gold_rank": 3,
+        "n_ranked": 34,
+        "n_candidates": 34
+      },
+      {
+        "id": "test:6716",
+        "gold_rank": 13,
+        "n_ranked": 34,
+        "n_candidates": 34
+      },
+      {
+        "id": "test:639",
+        "gold_rank": 1,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:750",
+        "gold_rank": 83,
+        "n_ranked": 94,
+        "n_candidates": 97
+      },
+      {
+        "id": "train:405",
+        "gold_rank": 2,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:330",
+        "gold_rank": 15,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:13",
+        "gold_rank": 17,
+        "n_ranked": 42,
+        "n_candidates": 42
+      },
+      {
+        "id": "test:622",
+        "gold_rank": 6,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:164",
+        "gold_rank": 1,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:19",
+        "gold_rank": 3,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:772",
+        "gold_rank": 6,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "train:140",
+        "gold_rank": 7,
+        "n_ranked": 30,
+        "n_candidates": 32
+      },
+      {
+        "id": "test:6090",
+        "gold_rank": 10,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:249",
+        "gold_rank": 14,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:850",
+        "gold_rank": 31,
+        "n_ranked": 59,
+        "n_candidates": 59
+      },
+      {
+        "id": "train:6617",
+        "gold_rank": 11,
+        "n_ranked": 23,
+        "n_candidates": 23
+      },
+      {
+        "id": "test:79",
+        "gold_rank": 3,
+        "n_ranked": 63,
+        "n_candidates": 63
+      },
+      {
+        "id": "train:720",
+        "gold_rank": 5,
+        "n_ranked": 25,
+        "n_candidates": 25
+      },
+      {
+        "id": "test:7029",
+        "gold_rank": 1,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "test:747",
+        "gold_rank": 1,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:275",
+        "gold_rank": 62,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:91",
+        "gold_rank": 8,
+        "n_ranked": 14,
+        "n_candidates": 14
+      }
+    ],
+    [
+      {
+        "id": "test:6679",
+        "gold_rank": 3,
+        "n_ranked": 28,
+        "n_candidates": 28
+      },
+      {
+        "id": "test:132",
+        "gold_rank": 9,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:6547",
+        "gold_rank": 13,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:3117",
+        "gold_rank": 6,
+        "n_ranked": 11,
+        "n_candidates": 11
+      },
+      {
+        "id": "test:6719",
+        "gold_rank": 9,
+        "n_ranked": 53,
+        "n_candidates": 53
+      },
+      {
+        "id": "test:6595",
+        "gold_rank": 1,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:326",
+        "gold_rank": 13,
+        "n_ranked": 23,
+        "n_candidates": 23
+      },
+      {
+        "id": "train:623",
+        "gold_rank": 2,
+        "n_ranked": 27,
+        "n_candidates": 27
+      },
+      {
+        "id": "test:6593",
+        "gold_rank": 19,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:2039",
+        "gold_rank": 12,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:120",
+        "gold_rank": 17,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:396",
+        "gold_rank": 50,
+        "n_ranked": 76,
+        "n_candidates": 76
+      },
+      {
+        "id": "test:6311",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6425",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:736",
+        "gold_rank": 10,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:128",
+        "gold_rank": 2,
+        "n_ranked": 43,
+        "n_candidates": 43
+      },
+      {
+        "id": "train:155",
+        "gold_rank": 44,
+        "n_ranked": 69,
+        "n_candidates": 69
+      },
+      {
+        "id": "test:754",
+        "gold_rank": 35,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:687",
+        "gold_rank": 7,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "test:6819",
+        "gold_rank": 8,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:190",
+        "gold_rank": 7,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:187",
+        "gold_rank": 11,
+        "n_ranked": 33,
+        "n_candidates": 33
+      },
+      {
+        "id": "test:3029",
+        "gold_rank": 9,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:6083",
+        "gold_rank": 2,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6280",
+        "gold_rank": 1,
+        "n_ranked": 7,
+        "n_candidates": 7
+      },
+      {
+        "id": "train:334",
+        "gold_rank": 2,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "test:115",
+        "gold_rank": 57,
+        "n_ranked": 65,
+        "n_candidates": 66
+      },
+      {
+        "id": "test:6578",
+        "gold_rank": 36,
+        "n_ranked": 38,
+        "n_candidates": 38
+      },
+      {
+        "id": "test:84",
+        "gold_rank": 2,
+        "n_ranked": 3,
+        "n_candidates": 3
+      },
+      {
+        "id": "test:2078",
+        "gold_rank": 3,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:413",
+        "gold_rank": 6,
+        "n_ranked": 8,
+        "n_candidates": 8
+      },
+      {
+        "id": "test:6632",
+        "gold_rank": 3,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:68",
+        "gold_rank": 14,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6541",
+        "gold_rank": 8,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:232",
+        "gold_rank": 12,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:6908",
+        "gold_rank": 6,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:6945",
+        "gold_rank": 1,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "test:7082",
+        "gold_rank": 36,
+        "n_ranked": 36,
+        "n_candidates": 36
+      },
+      {
+        "id": "train:247",
+        "gold_rank": 15,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:212",
+        "gold_rank": 20,
+        "n_ranked": 28,
+        "n_candidates": 29
+      },
+      {
+        "id": "test:6076",
+        "gold_rank": 4,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:62",
+        "gold_rank": 18,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "train:245",
+        "gold_rank": 17,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6229",
+        "gold_rank": 16,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:279",
+        "gold_rank": 15,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:6234",
+        "gold_rank": 9,
+        "n_ranked": 33,
+        "n_candidates": 33
+      },
+      {
+        "id": "train:70",
+        "gold_rank": 8,
+        "n_ranked": 13,
+        "n_candidates": 13
+      },
+      {
+        "id": "test:3055",
+        "gold_rank": 5,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:47",
+        "gold_rank": 7,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:252",
+        "gold_rank": 11,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:708",
+        "gold_rank": 13,
+        "n_ranked": 22,
+        "n_candidates": 22
+      },
+      {
+        "id": "test:151",
+        "gold_rank": 4,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:6214",
+        "gold_rank": 5,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:6276",
+        "gold_rank": 30,
+        "n_ranked": 47,
+        "n_candidates": 48
+      },
+      {
+        "id": "test:1",
+        "gold_rank": 18,
+        "n_ranked": 20,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:7142",
+        "gold_rank": 3,
+        "n_ranked": 10,
+        "n_candidates": 10
+      },
+      {
+        "id": "train:24",
+        "gold_rank": 8,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "train:314",
+        "gold_rank": 17,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:581",
+        "gold_rank": 65,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:835",
+        "gold_rank": 10,
+        "n_ranked": 56,
+        "n_candidates": 57
+      },
+      {
+        "id": "train:6646",
+        "gold_rank": 14,
+        "n_ranked": 28,
+        "n_candidates": 28
+      },
+      {
+        "id": "test:394",
+        "gold_rank": 17,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:284",
+        "gold_rank": 5,
+        "n_ranked": 31,
+        "n_candidates": 31
+      },
+      {
+        "id": "train:107",
+        "gold_rank": 6,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:1009",
+        "gold_rank": 5,
+        "n_ranked": 22,
+        "n_candidates": 23
+      },
+      {
+        "id": "train:321",
+        "gold_rank": 16,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:6688",
+        "gold_rank": 6,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:172",
+        "gold_rank": 2,
+        "n_ranked": 16,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6869",
+        "gold_rank": 26,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "train:144",
+        "gold_rank": 14,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:381",
+        "gold_rank": 56,
+        "n_ranked": 69,
+        "n_candidates": 69
+      },
+      {
+        "id": "train:261",
+        "gold_rank": 11,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:465",
+        "gold_rank": 3,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:237",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:154",
+        "gold_rank": 17,
+        "n_ranked": 52,
+        "n_candidates": 52
+      },
+      {
+        "id": "test:374",
+        "gold_rank": 25,
+        "n_ranked": 35,
+        "n_candidates": 35
+      },
+      {
+        "id": "test:6433",
+        "gold_rank": 37,
+        "n_ranked": 46,
+        "n_candidates": 46
+      },
+      {
+        "id": "test:836",
+        "gold_rank": 5,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:3059",
+        "gold_rank": 10,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:45",
+        "gold_rank": 22,
+        "n_ranked": 29,
+        "n_candidates": 29
+      },
+      {
+        "id": "test:742",
+        "gold_rank": 9,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "test:166",
+        "gold_rank": 3,
+        "n_ranked": 5,
+        "n_candidates": 6
+      },
+      {
+        "id": "test:6131",
+        "gold_rank": 4,
+        "n_ranked": 49,
+        "n_candidates": 49
+      },
+      {
+        "id": "train:174",
+        "gold_rank": 10,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:6769",
+        "gold_rank": 9,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:150",
+        "gold_rank": 35,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "train:223",
+        "gold_rank": 5,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:218",
+        "gold_rank": 1,
+        "n_ranked": 3,
+        "n_candidates": 3
+      },
+      {
+        "id": "train:156",
+        "gold_rank": 2,
+        "n_ranked": 8,
+        "n_candidates": 8
+      },
+      {
+        "id": "test:473",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:592",
+        "gold_rank": 5,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:412",
+        "gold_rank": 7,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "train:196",
+        "gold_rank": 2,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:471",
+        "gold_rank": 1,
+        "n_ranked": 1,
+        "n_candidates": 1
+      },
+      {
+        "id": "test:355",
+        "gold_rank": 28,
+        "n_ranked": 65,
+        "n_candidates": 66
+      },
+      {
+        "id": "test:3136",
+        "gold_rank": 20,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:516",
+        "gold_rank": null,
+        "n_ranked": 0,
+        "n_candidates": 49
+      },
+      {
+        "id": "train:399",
+        "gold_rank": 1,
+        "n_ranked": 30,
+        "n_candidates": 30
+      },
+      {
+        "id": "test:6783",
+        "gold_rank": 6,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "test:6019",
+        "gold_rank": 5,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:6097",
+        "gold_rank": 21,
+        "n_ranked": 37,
+        "n_candidates": 37
+      },
+      {
+        "id": "train:2091",
+        "gold_rank": 4,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:6389",
+        "gold_rank": 11,
+        "n_ranked": 16,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6128",
+        "gold_rank": 4,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:103",
+        "gold_rank": 56,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "test:85",
+        "gold_rank": 13,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:40",
+        "gold_rank": 14,
+        "n_ranked": 49,
+        "n_candidates": 51
+      },
+      {
+        "id": "test:788",
+        "gold_rank": 10,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6789",
+        "gold_rank": 6,
+        "n_ranked": 20,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:7127",
+        "gold_rank": 1,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6039",
+        "gold_rank": 60,
+        "n_ranked": 60,
+        "n_candidates": 60
+      },
+      {
+        "id": "train:184",
+        "gold_rank": 4,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "test:7148",
+        "gold_rank": 1,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:83",
+        "gold_rank": 2,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:174",
+        "gold_rank": 30,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:6864",
+        "gold_rank": 1,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:349",
+        "gold_rank": 10,
+        "n_ranked": 24,
+        "n_candidates": 25
+      },
+      {
+        "id": "test:139",
+        "gold_rank": 9,
+        "n_ranked": 47,
+        "n_candidates": 47
+      },
+      {
+        "id": "train:3048",
+        "gold_rank": 11,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6530",
+        "gold_rank": 14,
+        "n_ranked": 19,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:6468",
+        "gold_rank": 11,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:7094",
+        "gold_rank": 7,
+        "n_ranked": 31,
+        "n_candidates": 31
+      },
+      {
+        "id": "test:207",
+        "gold_rank": 43,
+        "n_ranked": 47,
+        "n_candidates": 47
+      },
+      {
+        "id": "test:3003",
+        "gold_rank": 30,
+        "n_ranked": 72,
+        "n_candidates": 74
+      },
+      {
+        "id": "test:6049",
+        "gold_rank": 6,
+        "n_ranked": 6,
+        "n_candidates": 6
+      },
+      {
+        "id": "test:101",
+        "gold_rank": 2,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:6303",
+        "gold_rank": 37,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:864",
+        "gold_rank": 29,
+        "n_ranked": 62,
+        "n_candidates": 62
+      },
+      {
+        "id": "train:10",
+        "gold_rank": 6,
+        "n_ranked": 34,
+        "n_candidates": 34
+      },
+      {
+        "id": "test:6716",
+        "gold_rank": 13,
+        "n_ranked": 34,
+        "n_candidates": 34
+      },
+      {
+        "id": "test:639",
+        "gold_rank": 4,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:750",
+        "gold_rank": 88,
+        "n_ranked": 94,
+        "n_candidates": 97
+      },
+      {
+        "id": "train:405",
+        "gold_rank": 2,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:330",
+        "gold_rank": 16,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:13",
+        "gold_rank": 25,
+        "n_ranked": 42,
+        "n_candidates": 42
+      },
+      {
+        "id": "test:622",
+        "gold_rank": 7,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:164",
+        "gold_rank": 1,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:19",
+        "gold_rank": 4,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:772",
+        "gold_rank": 5,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "train:140",
+        "gold_rank": 6,
+        "n_ranked": 30,
+        "n_candidates": 32
+      },
+      {
+        "id": "test:6090",
+        "gold_rank": 16,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:249",
+        "gold_rank": 12,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:850",
+        "gold_rank": 18,
+        "n_ranked": 59,
+        "n_candidates": 59
+      },
+      {
+        "id": "train:6617",
+        "gold_rank": 13,
+        "n_ranked": 23,
+        "n_candidates": 23
+      },
+      {
+        "id": "test:79",
+        "gold_rank": 2,
+        "n_ranked": 63,
+        "n_candidates": 63
+      },
+      {
+        "id": "train:720",
+        "gold_rank": 2,
+        "n_ranked": 25,
+        "n_candidates": 25
+      },
+      {
+        "id": "test:7029",
+        "gold_rank": 1,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "test:747",
+        "gold_rank": 1,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:275",
+        "gold_rank": 57,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:91",
+        "gold_rank": 9,
+        "n_ranked": 14,
+        "n_candidates": 14
+      }
+    ],
+    [
+      {
+        "id": "test:6679",
+        "gold_rank": 3,
+        "n_ranked": 28,
+        "n_candidates": 28
+      },
+      {
+        "id": "test:132",
+        "gold_rank": 11,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:6547",
+        "gold_rank": 14,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:3117",
+        "gold_rank": 3,
+        "n_ranked": 11,
+        "n_candidates": 11
+      },
+      {
+        "id": "test:6719",
+        "gold_rank": 33,
+        "n_ranked": 53,
+        "n_candidates": 53
+      },
+      {
+        "id": "test:6595",
+        "gold_rank": 2,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:326",
+        "gold_rank": 4,
+        "n_ranked": 23,
+        "n_candidates": 23
+      },
+      {
+        "id": "train:623",
+        "gold_rank": 2,
+        "n_ranked": 27,
+        "n_candidates": 27
+      },
+      {
+        "id": "test:6593",
+        "gold_rank": 4,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:2039",
+        "gold_rank": 6,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:120",
+        "gold_rank": 7,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:396",
+        "gold_rank": 5,
+        "n_ranked": 76,
+        "n_candidates": 76
+      },
+      {
+        "id": "test:6311",
+        "gold_rank": 17,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6425",
+        "gold_rank": 14,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:736",
+        "gold_rank": 8,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:128",
+        "gold_rank": 1,
+        "n_ranked": 43,
+        "n_candidates": 43
+      },
+      {
+        "id": "train:155",
+        "gold_rank": 8,
+        "n_ranked": 69,
+        "n_candidates": 69
+      },
+      {
+        "id": "test:754",
+        "gold_rank": 33,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:687",
+        "gold_rank": 29,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "test:6819",
+        "gold_rank": 3,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:190",
+        "gold_rank": 8,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:187",
+        "gold_rank": 4,
+        "n_ranked": 33,
+        "n_candidates": 33
+      },
+      {
+        "id": "test:3029",
+        "gold_rank": 55,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:6083",
+        "gold_rank": 11,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6280",
+        "gold_rank": 1,
+        "n_ranked": 7,
+        "n_candidates": 7
+      },
+      {
+        "id": "train:334",
+        "gold_rank": 2,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "test:115",
+        "gold_rank": 33,
+        "n_ranked": 65,
+        "n_candidates": 66
+      },
+      {
+        "id": "test:6578",
+        "gold_rank": 24,
+        "n_ranked": 38,
+        "n_candidates": 38
+      },
+      {
+        "id": "test:84",
+        "gold_rank": 3,
+        "n_ranked": 3,
+        "n_candidates": 3
+      },
+      {
+        "id": "test:2078",
+        "gold_rank": 10,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:413",
+        "gold_rank": 8,
+        "n_ranked": 8,
+        "n_candidates": 8
+      },
+      {
+        "id": "test:6632",
+        "gold_rank": 15,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:68",
+        "gold_rank": 3,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6541",
+        "gold_rank": 4,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:232",
+        "gold_rank": 2,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:6908",
+        "gold_rank": 13,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:6945",
+        "gold_rank": 1,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "test:7082",
+        "gold_rank": 35,
+        "n_ranked": 36,
+        "n_candidates": 36
+      },
+      {
+        "id": "train:247",
+        "gold_rank": 3,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:212",
+        "gold_rank": 20,
+        "n_ranked": 28,
+        "n_candidates": 29
+      },
+      {
+        "id": "test:6076",
+        "gold_rank": 12,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:62",
+        "gold_rank": 16,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "train:245",
+        "gold_rank": 10,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6229",
+        "gold_rank": 3,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:279",
+        "gold_rank": 5,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:6234",
+        "gold_rank": 2,
+        "n_ranked": 33,
+        "n_candidates": 33
+      },
+      {
+        "id": "train:70",
+        "gold_rank": 3,
+        "n_ranked": 13,
+        "n_candidates": 13
+      },
+      {
+        "id": "test:3055",
+        "gold_rank": 2,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:47",
+        "gold_rank": 2,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:252",
+        "gold_rank": 5,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:708",
+        "gold_rank": 17,
+        "n_ranked": 22,
+        "n_candidates": 22
+      },
+      {
+        "id": "test:151",
+        "gold_rank": 17,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:6214",
+        "gold_rank": 6,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:6276",
+        "gold_rank": 43,
+        "n_ranked": 47,
+        "n_candidates": 48
+      },
+      {
+        "id": "test:1",
+        "gold_rank": 8,
+        "n_ranked": 20,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:7142",
+        "gold_rank": 4,
+        "n_ranked": 10,
+        "n_candidates": 10
+      },
+      {
+        "id": "train:24",
+        "gold_rank": 3,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "train:314",
+        "gold_rank": 9,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:581",
+        "gold_rank": 57,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:835",
+        "gold_rank": 13,
+        "n_ranked": 56,
+        "n_candidates": 57
+      },
+      {
+        "id": "train:6646",
+        "gold_rank": 11,
+        "n_ranked": 28,
+        "n_candidates": 28
+      },
+      {
+        "id": "test:394",
+        "gold_rank": 18,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:284",
+        "gold_rank": 1,
+        "n_ranked": 31,
+        "n_candidates": 31
+      },
+      {
+        "id": "train:107",
+        "gold_rank": 5,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:1009",
+        "gold_rank": 7,
+        "n_ranked": 22,
+        "n_candidates": 23
+      },
+      {
+        "id": "train:321",
+        "gold_rank": 5,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:6688",
+        "gold_rank": 4,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:172",
+        "gold_rank": 2,
+        "n_ranked": 16,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6869",
+        "gold_rank": 10,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "train:144",
+        "gold_rank": 6,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:381",
+        "gold_rank": 64,
+        "n_ranked": 69,
+        "n_candidates": 69
+      },
+      {
+        "id": "train:261",
+        "gold_rank": 10,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:465",
+        "gold_rank": 5,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:237",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:154",
+        "gold_rank": 32,
+        "n_ranked": 52,
+        "n_candidates": 52
+      },
+      {
+        "id": "test:374",
+        "gold_rank": 31,
+        "n_ranked": 35,
+        "n_candidates": 35
+      },
+      {
+        "id": "test:6433",
+        "gold_rank": 45,
+        "n_ranked": 46,
+        "n_candidates": 46
+      },
+      {
+        "id": "test:836",
+        "gold_rank": 2,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:3059",
+        "gold_rank": 15,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:45",
+        "gold_rank": 24,
+        "n_ranked": 29,
+        "n_candidates": 29
+      },
+      {
+        "id": "test:742",
+        "gold_rank": 4,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "test:166",
+        "gold_rank": 4,
+        "n_ranked": 5,
+        "n_candidates": 6
+      },
+      {
+        "id": "test:6131",
+        "gold_rank": 30,
+        "n_ranked": 49,
+        "n_candidates": 49
+      },
+      {
+        "id": "train:174",
+        "gold_rank": 1,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:6769",
+        "gold_rank": 18,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:150",
+        "gold_rank": 27,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "train:223",
+        "gold_rank": 6,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:218",
+        "gold_rank": 2,
+        "n_ranked": 3,
+        "n_candidates": 3
+      },
+      {
+        "id": "train:156",
+        "gold_rank": 2,
+        "n_ranked": 8,
+        "n_candidates": 8
+      },
+      {
+        "id": "test:473",
+        "gold_rank": 12,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:592",
+        "gold_rank": 8,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:412",
+        "gold_rank": 8,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "train:196",
+        "gold_rank": 2,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:471",
+        "gold_rank": 1,
+        "n_ranked": 1,
+        "n_candidates": 1
+      },
+      {
+        "id": "test:355",
+        "gold_rank": 1,
+        "n_ranked": 65,
+        "n_candidates": 66
+      },
+      {
+        "id": "test:3136",
+        "gold_rank": 4,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:516",
+        "gold_rank": null,
+        "n_ranked": 0,
+        "n_candidates": 49
+      },
+      {
+        "id": "train:399",
+        "gold_rank": 14,
+        "n_ranked": 30,
+        "n_candidates": 30
+      },
+      {
+        "id": "test:6783",
+        "gold_rank": 10,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "test:6019",
+        "gold_rank": 15,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:6097",
+        "gold_rank": 24,
+        "n_ranked": 37,
+        "n_candidates": 37
+      },
+      {
+        "id": "train:2091",
+        "gold_rank": 3,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:6389",
+        "gold_rank": 15,
+        "n_ranked": 16,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6128",
+        "gold_rank": 14,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:103",
+        "gold_rank": 40,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "test:85",
+        "gold_rank": 8,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:40",
+        "gold_rank": 12,
+        "n_ranked": 49,
+        "n_candidates": 51
+      },
+      {
+        "id": "test:788",
+        "gold_rank": 16,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6789",
+        "gold_rank": 17,
+        "n_ranked": 20,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:7127",
+        "gold_rank": 12,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6039",
+        "gold_rank": 32,
+        "n_ranked": 60,
+        "n_candidates": 60
+      },
+      {
+        "id": "train:184",
+        "gold_rank": 8,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "test:7148",
+        "gold_rank": 15,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:83",
+        "gold_rank": 6,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:174",
+        "gold_rank": 22,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:6864",
+        "gold_rank": 7,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:349",
+        "gold_rank": 7,
+        "n_ranked": 24,
+        "n_candidates": 25
+      },
+      {
+        "id": "test:139",
+        "gold_rank": 9,
+        "n_ranked": 47,
+        "n_candidates": 47
+      },
+      {
+        "id": "train:3048",
+        "gold_rank": 6,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6530",
+        "gold_rank": 8,
+        "n_ranked": 19,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:6468",
+        "gold_rank": 15,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:7094",
+        "gold_rank": 24,
+        "n_ranked": 31,
+        "n_candidates": 31
+      },
+      {
+        "id": "test:207",
+        "gold_rank": 47,
+        "n_ranked": 47,
+        "n_candidates": 47
+      },
+      {
+        "id": "test:3003",
+        "gold_rank": 46,
+        "n_ranked": 72,
+        "n_candidates": 74
+      },
+      {
+        "id": "test:6049",
+        "gold_rank": 2,
+        "n_ranked": 6,
+        "n_candidates": 6
+      },
+      {
+        "id": "test:101",
+        "gold_rank": 8,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:6303",
+        "gold_rank": 39,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:864",
+        "gold_rank": 41,
+        "n_ranked": 62,
+        "n_candidates": 62
+      },
+      {
+        "id": "train:10",
+        "gold_rank": 8,
+        "n_ranked": 34,
+        "n_candidates": 34
+      },
+      {
+        "id": "test:6716",
+        "gold_rank": 19,
+        "n_ranked": 34,
+        "n_candidates": 34
+      },
+      {
+        "id": "test:639",
+        "gold_rank": 10,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:750",
+        "gold_rank": 59,
+        "n_ranked": 94,
+        "n_candidates": 97
+      },
+      {
+        "id": "train:405",
+        "gold_rank": 1,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:330",
+        "gold_rank": 11,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:13",
+        "gold_rank": 7,
+        "n_ranked": 42,
+        "n_candidates": 42
+      },
+      {
+        "id": "test:622",
+        "gold_rank": 8,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:164",
+        "gold_rank": 1,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:19",
+        "gold_rank": 4,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:772",
+        "gold_rank": 14,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "train:140",
+        "gold_rank": 2,
+        "n_ranked": 30,
+        "n_candidates": 32
+      },
+      {
+        "id": "test:6090",
+        "gold_rank": 4,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:249",
+        "gold_rank": 1,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:850",
+        "gold_rank": 9,
+        "n_ranked": 59,
+        "n_candidates": 59
+      },
+      {
+        "id": "train:6617",
+        "gold_rank": 11,
+        "n_ranked": 23,
+        "n_candidates": 23
+      },
+      {
+        "id": "test:79",
+        "gold_rank": 6,
+        "n_ranked": 63,
+        "n_candidates": 63
+      },
+      {
+        "id": "train:720",
+        "gold_rank": 1,
+        "n_ranked": 25,
+        "n_candidates": 25
+      },
+      {
+        "id": "test:7029",
+        "gold_rank": 1,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "test:747",
+        "gold_rank": 1,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:275",
+        "gold_rank": 6,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:91",
+        "gold_rank": 1,
+        "n_ranked": 14,
+        "n_candidates": 14
+      }
+    ],
+    [
+      {
+        "id": "test:6679",
+        "gold_rank": 3,
+        "n_ranked": 28,
+        "n_candidates": 28
+      },
+      {
+        "id": "test:132",
+        "gold_rank": 13,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:6547",
+        "gold_rank": 17,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:3117",
+        "gold_rank": 11,
+        "n_ranked": 11,
+        "n_candidates": 11
+      },
+      {
+        "id": "test:6719",
+        "gold_rank": 39,
+        "n_ranked": 53,
+        "n_candidates": 53
+      },
+      {
+        "id": "test:6595",
+        "gold_rank": 11,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:326",
+        "gold_rank": 4,
+        "n_ranked": 23,
+        "n_candidates": 23
+      },
+      {
+        "id": "train:623",
+        "gold_rank": 18,
+        "n_ranked": 27,
+        "n_candidates": 27
+      },
+      {
+        "id": "test:6593",
+        "gold_rank": 8,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:2039",
+        "gold_rank": 1,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:120",
+        "gold_rank": 13,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:396",
+        "gold_rank": 25,
+        "n_ranked": 76,
+        "n_candidates": 76
+      },
+      {
+        "id": "test:6311",
+        "gold_rank": 5,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6425",
+        "gold_rank": 9,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:736",
+        "gold_rank": 18,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:128",
+        "gold_rank": 20,
+        "n_ranked": 43,
+        "n_candidates": 43
+      },
+      {
+        "id": "train:155",
+        "gold_rank": 48,
+        "n_ranked": 69,
+        "n_candidates": 69
+      },
+      {
+        "id": "test:754",
+        "gold_rank": 24,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:687",
+        "gold_rank": 9,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "test:6819",
+        "gold_rank": 1,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:190",
+        "gold_rank": 17,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:187",
+        "gold_rank": 31,
+        "n_ranked": 33,
+        "n_candidates": 33
+      },
+      {
+        "id": "test:3029",
+        "gold_rank": 33,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:6083",
+        "gold_rank": 8,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6280",
+        "gold_rank": 2,
+        "n_ranked": 7,
+        "n_candidates": 7
+      },
+      {
+        "id": "train:334",
+        "gold_rank": 11,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "test:115",
+        "gold_rank": 64,
+        "n_ranked": 65,
+        "n_candidates": 66
+      },
+      {
+        "id": "test:6578",
+        "gold_rank": 2,
+        "n_ranked": 38,
+        "n_candidates": 38
+      },
+      {
+        "id": "test:84",
+        "gold_rank": 1,
+        "n_ranked": 3,
+        "n_candidates": 3
+      },
+      {
+        "id": "test:2078",
+        "gold_rank": 12,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:413",
+        "gold_rank": 3,
+        "n_ranked": 8,
+        "n_candidates": 8
+      },
+      {
+        "id": "test:6632",
+        "gold_rank": 13,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:68",
+        "gold_rank": 4,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6541",
+        "gold_rank": 6,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:232",
+        "gold_rank": 1,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:6908",
+        "gold_rank": 11,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:6945",
+        "gold_rank": 3,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "test:7082",
+        "gold_rank": 28,
+        "n_ranked": 36,
+        "n_candidates": 36
+      },
+      {
+        "id": "train:247",
+        "gold_rank": 7,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:212",
+        "gold_rank": 21,
+        "n_ranked": 28,
+        "n_candidates": 29
+      },
+      {
+        "id": "test:6076",
+        "gold_rank": 17,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:62",
+        "gold_rank": 4,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "train:245",
+        "gold_rank": 2,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6229",
+        "gold_rank": 12,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:279",
+        "gold_rank": 15,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:6234",
+        "gold_rank": 7,
+        "n_ranked": 33,
+        "n_candidates": 33
+      },
+      {
+        "id": "train:70",
+        "gold_rank": 13,
+        "n_ranked": 13,
+        "n_candidates": 13
+      },
+      {
+        "id": "test:3055",
+        "gold_rank": 1,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:47",
+        "gold_rank": 6,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:252",
+        "gold_rank": 1,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:708",
+        "gold_rank": 8,
+        "n_ranked": 22,
+        "n_candidates": 22
+      },
+      {
+        "id": "test:151",
+        "gold_rank": 22,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:6214",
+        "gold_rank": 6,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:6276",
+        "gold_rank": 3,
+        "n_ranked": 47,
+        "n_candidates": 48
+      },
+      {
+        "id": "test:1",
+        "gold_rank": 14,
+        "n_ranked": 20,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:7142",
+        "gold_rank": 3,
+        "n_ranked": 10,
+        "n_candidates": 10
+      },
+      {
+        "id": "train:24",
+        "gold_rank": 4,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "train:314",
+        "gold_rank": 1,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:581",
+        "gold_rank": 61,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:835",
+        "gold_rank": 4,
+        "n_ranked": 56,
+        "n_candidates": 57
+      },
+      {
+        "id": "train:6646",
+        "gold_rank": 2,
+        "n_ranked": 28,
+        "n_candidates": 28
+      },
+      {
+        "id": "test:394",
+        "gold_rank": 18,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:284",
+        "gold_rank": 26,
+        "n_ranked": 31,
+        "n_candidates": 31
+      },
+      {
+        "id": "train:107",
+        "gold_rank": 10,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:1009",
+        "gold_rank": 6,
+        "n_ranked": 22,
+        "n_candidates": 23
+      },
+      {
+        "id": "train:321",
+        "gold_rank": 7,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:6688",
+        "gold_rank": 11,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:172",
+        "gold_rank": 8,
+        "n_ranked": 16,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6869",
+        "gold_rank": 2,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "train:144",
+        "gold_rank": 10,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:381",
+        "gold_rank": 3,
+        "n_ranked": 69,
+        "n_candidates": 69
+      },
+      {
+        "id": "train:261",
+        "gold_rank": 3,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:465",
+        "gold_rank": 6,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:237",
+        "gold_rank": 7,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:154",
+        "gold_rank": 40,
+        "n_ranked": 52,
+        "n_candidates": 52
+      },
+      {
+        "id": "test:374",
+        "gold_rank": 11,
+        "n_ranked": 35,
+        "n_candidates": 35
+      },
+      {
+        "id": "test:6433",
+        "gold_rank": 33,
+        "n_ranked": 46,
+        "n_candidates": 46
+      },
+      {
+        "id": "test:836",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:3059",
+        "gold_rank": 12,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:45",
+        "gold_rank": 7,
+        "n_ranked": 29,
+        "n_candidates": 29
+      },
+      {
+        "id": "test:742",
+        "gold_rank": 11,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "test:166",
+        "gold_rank": 5,
+        "n_ranked": 5,
+        "n_candidates": 6
+      },
+      {
+        "id": "test:6131",
+        "gold_rank": 24,
+        "n_ranked": 49,
+        "n_candidates": 49
+      },
+      {
+        "id": "train:174",
+        "gold_rank": 63,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:6769",
+        "gold_rank": 16,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:150",
+        "gold_rank": 33,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "train:223",
+        "gold_rank": 3,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "train:218",
+        "gold_rank": 2,
+        "n_ranked": 3,
+        "n_candidates": 3
+      },
+      {
+        "id": "train:156",
+        "gold_rank": 2,
+        "n_ranked": 8,
+        "n_candidates": 8
+      },
+      {
+        "id": "test:473",
+        "gold_rank": 13,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "train:592",
+        "gold_rank": 5,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:412",
+        "gold_rank": 5,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "train:196",
+        "gold_rank": 1,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:471",
+        "gold_rank": 1,
+        "n_ranked": 1,
+        "n_candidates": 1
+      },
+      {
+        "id": "test:355",
+        "gold_rank": 63,
+        "n_ranked": 65,
+        "n_candidates": 66
+      },
+      {
+        "id": "test:3136",
+        "gold_rank": 11,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:516",
+        "gold_rank": null,
+        "n_ranked": 0,
+        "n_candidates": 49
+      },
+      {
+        "id": "train:399",
+        "gold_rank": 17,
+        "n_ranked": 30,
+        "n_candidates": 30
+      },
+      {
+        "id": "test:6783",
+        "gold_rank": 2,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "test:6019",
+        "gold_rank": 3,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:6097",
+        "gold_rank": 13,
+        "n_ranked": 37,
+        "n_candidates": 37
+      },
+      {
+        "id": "train:2091",
+        "gold_rank": 5,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "test:6389",
+        "gold_rank": 1,
+        "n_ranked": 16,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6128",
+        "gold_rank": 16,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:103",
+        "gold_rank": 57,
+        "n_ranked": 57,
+        "n_candidates": 57
+      },
+      {
+        "id": "test:85",
+        "gold_rank": 10,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:40",
+        "gold_rank": 16,
+        "n_ranked": 49,
+        "n_candidates": 51
+      },
+      {
+        "id": "test:788",
+        "gold_rank": 11,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6789",
+        "gold_rank": 13,
+        "n_ranked": 20,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:7127",
+        "gold_rank": 8,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:6039",
+        "gold_rank": 53,
+        "n_ranked": 60,
+        "n_candidates": 60
+      },
+      {
+        "id": "train:184",
+        "gold_rank": 7,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "test:7148",
+        "gold_rank": 9,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:83",
+        "gold_rank": 4,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:174",
+        "gold_rank": 21,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:6864",
+        "gold_rank": 3,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:349",
+        "gold_rank": 5,
+        "n_ranked": 24,
+        "n_candidates": 25
+      },
+      {
+        "id": "test:139",
+        "gold_rank": 9,
+        "n_ranked": 47,
+        "n_candidates": 47
+      },
+      {
+        "id": "train:3048",
+        "gold_rank": 13,
+        "n_ranked": 19,
+        "n_candidates": 19
+      },
+      {
+        "id": "test:6530",
+        "gold_rank": 9,
+        "n_ranked": 19,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:6468",
+        "gold_rank": 23,
+        "n_ranked": 24,
+        "n_candidates": 24
+      },
+      {
+        "id": "test:7094",
+        "gold_rank": 19,
+        "n_ranked": 31,
+        "n_candidates": 31
+      },
+      {
+        "id": "test:207",
+        "gold_rank": 42,
+        "n_ranked": 47,
+        "n_candidates": 47
+      },
+      {
+        "id": "test:3003",
+        "gold_rank": 56,
+        "n_ranked": 72,
+        "n_candidates": 74
+      },
+      {
+        "id": "test:6049",
+        "gold_rank": 1,
+        "n_ranked": 6,
+        "n_candidates": 6
+      },
+      {
+        "id": "test:101",
+        "gold_rank": 4,
+        "n_ranked": 12,
+        "n_candidates": 12
+      },
+      {
+        "id": "train:6303",
+        "gold_rank": 39,
+        "n_ranked": 41,
+        "n_candidates": 41
+      },
+      {
+        "id": "test:864",
+        "gold_rank": 11,
+        "n_ranked": 62,
+        "n_candidates": 62
+      },
+      {
+        "id": "train:10",
+        "gold_rank": 30,
+        "n_ranked": 34,
+        "n_candidates": 34
+      },
+      {
+        "id": "test:6716",
+        "gold_rank": 9,
+        "n_ranked": 34,
+        "n_candidates": 34
+      },
+      {
+        "id": "test:639",
+        "gold_rank": 14,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:750",
+        "gold_rank": 50,
+        "n_ranked": 94,
+        "n_candidates": 97
+      },
+      {
+        "id": "train:405",
+        "gold_rank": 7,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "train:330",
+        "gold_rank": 4,
+        "n_ranked": 18,
+        "n_candidates": 18
+      },
+      {
+        "id": "test:13",
+        "gold_rank": 17,
+        "n_ranked": 42,
+        "n_candidates": 42
+      },
+      {
+        "id": "test:622",
+        "gold_rank": 17,
+        "n_ranked": 20,
+        "n_candidates": 20
+      },
+      {
+        "id": "test:164",
+        "gold_rank": 1,
+        "n_ranked": 16,
+        "n_candidates": 16
+      },
+      {
+        "id": "train:19",
+        "gold_rank": 2,
+        "n_ranked": 17,
+        "n_candidates": 17
+      },
+      {
+        "id": "test:772",
+        "gold_rank": 3,
+        "n_ranked": 14,
+        "n_candidates": 14
+      },
+      {
+        "id": "train:140",
+        "gold_rank": 7,
+        "n_ranked": 30,
+        "n_candidates": 32
+      },
+      {
+        "id": "test:6090",
+        "gold_rank": 7,
+        "n_ranked": 17,
+        "n_candidates": 18
+      },
+      {
+        "id": "train:249",
+        "gold_rank": 12,
+        "n_ranked": 21,
+        "n_candidates": 21
+      },
+      {
+        "id": "test:850",
+        "gold_rank": 29,
+        "n_ranked": 59,
+        "n_candidates": 59
+      },
+      {
+        "id": "train:6617",
+        "gold_rank": 5,
+        "n_ranked": 23,
+        "n_candidates": 23
+      },
+      {
+        "id": "test:79",
+        "gold_rank": 3,
+        "n_ranked": 63,
+        "n_candidates": 63
+      },
+      {
+        "id": "train:720",
+        "gold_rank": 17,
+        "n_ranked": 25,
+        "n_candidates": 25
+      },
+      {
+        "id": "test:7029",
+        "gold_rank": 1,
+        "n_ranked": 26,
+        "n_candidates": 26
+      },
+      {
+        "id": "test:747",
+        "gold_rank": 4,
+        "n_ranked": 15,
+        "n_candidates": 15
+      },
+      {
+        "id": "test:275",
+        "gold_rank": 6,
+        "n_ranked": 66,
+        "n_candidates": 66
+      },
+      {
+        "id": "train:91",
+        "gold_rank": 7,
+        "n_ranked": 14,
+        "n_candidates": 14
+      }
+    ]
+  ]
+}

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="512" viewBox="0 0 780 512" font-family="Helvetica,Arial,sans-serif">
+<rect width="780" height="512" fill="white"/>
+<text x="390.0" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222222">Gold-substitute ranking: MRR by configuration</text>
+<line x1="220.0" y1="74" x2="220.0" y2="466" stroke="#E6E6E6"/>
+<text x="220.0" y="484" text-anchor="middle" font-size="11" fill="#888888">0</text>
+<line x1="321.3" y1="74" x2="321.3" y2="466" stroke="#E6E6E6"/>
+<text x="321.3" y="484" text-anchor="middle" font-size="11" fill="#888888">0.1</text>
+<line x1="422.5" y1="74" x2="422.5" y2="466" stroke="#E6E6E6"/>
+<text x="422.5" y="484" text-anchor="middle" font-size="11" fill="#888888">0.2</text>
+<line x1="523.8" y1="74" x2="523.8" y2="466" stroke="#E6E6E6"/>
+<text x="523.8" y="484" text-anchor="middle" font-size="11" fill="#888888">0.3</text>
+<line x1="625.1" y1="74" x2="625.1" y2="466" stroke="#E6E6E6"/>
+<text x="625.1" y="484" text-anchor="middle" font-size="11" fill="#888888">0.4</text>
+<line x1="726.4" y1="74" x2="726.4" y2="466" stroke="#E6E6E6"/>
+<text x="726.4" y="484" text-anchor="middle" font-size="11" fill="#888888">0.5</text>
+<text x="465.0" y="504" text-anchor="middle" font-size="12" fill="#222222">MRR (higher is better)</text>
+<line x1="220.0" y1="74" x2="220.0" y2="466" stroke="#888888"/>
+<line x1="406.3" y1="74" x2="406.3" y2="466" stroke="#E45756" stroke-width="1.5" stroke-dasharray="5,4"/>
+<text x="406.3" y="68" text-anchor="middle" font-size="10.5" fill="#E45756">random ≈ 0.184</text>
+<text x="210" y="103.0" text-anchor="end" font-size="12" fill="#222222">global_depth1</text>
+<rect x="220.0" y="76.0" width="437.5" height="16" fill="#4C78A8"/>
+<text x="662.5" y="88.0" text-anchor="start" font-size="10.5" fill="#222222">0.432</text>
+<rect x="220.0" y="96.0" width="362.6" height="16" fill="#F58518"/>
+<text x="587.6" y="108.0" text-anchor="start" font-size="10.5" fill="#222222">0.358</text>
+<text x="210" y="159.0" text-anchor="end" font-size="12" fill="#222222">global_depth1_fullcorpus</text>
+<rect x="220.0" y="132.0" width="430.4" height="16" fill="#4C78A8"/>
+<text x="655.4" y="144.0" text-anchor="start" font-size="10.5" fill="#222222">0.425</text>
+<rect x="220.0" y="152.0" width="369.6" height="16" fill="#F58518"/>
+<text x="594.6" y="164.0" text-anchor="start" font-size="10.5" fill="#222222">0.365</text>
+<text x="210" y="215.0" text-anchor="end" font-size="12" fill="#222222">depth1_walks_200</text>
+<rect x="220.0" y="188.0" width="355.5" height="16" fill="#4C78A8"/>
+<text x="580.5" y="200.0" text-anchor="start" font-size="10.5" fill="#222222">0.351</text>
+<rect x="220.0" y="208.0" width="332.2" height="16" fill="#F58518"/>
+<text x="557.2" y="220.0" text-anchor="start" font-size="10.5" fill="#222222">0.328</text>
+<text x="210" y="271.0" text-anchor="end" font-size="12" fill="#222222">depth_1</text>
+<rect x="220.0" y="244.0" width="340.3" height="16" fill="#4C78A8"/>
+<text x="565.3" y="256.0" text-anchor="start" font-size="10.5" fill="#222222">0.336</text>
+<rect x="220.0" y="264.0" width="339.3" height="16" fill="#F58518"/>
+<text x="564.3" y="276.0" text-anchor="start" font-size="10.5" fill="#222222">0.335</text>
+<text x="210" y="327.0" text-anchor="end" font-size="12" fill="#222222">embedding_reference</text>
+<rect x="220.0" y="300.0" width="255.2" height="16" fill="#4C78A8"/>
+<text x="480.2" y="312.0" text-anchor="start" font-size="10.5" fill="#222222">0.252</text>
+<rect x="220.0" y="320.0" width="263.3" height="16" fill="#F58518"/>
+<text x="488.3" y="332.0" text-anchor="start" font-size="10.5" fill="#222222">0.260</text>
+<text x="210" y="383.0" text-anchor="end" font-size="12" fill="#222222">global_walks_100</text>
+<rect x="220.0" y="356.0" width="229.9" height="16" fill="#4C78A8"/>
+<text x="454.9" y="368.0" text-anchor="start" font-size="10.5" fill="#222222">0.227</text>
+<rect x="220.0" y="376.0" width="244.1" height="16" fill="#F58518"/>
+<text x="469.1" y="388.0" text-anchor="start" font-size="10.5" fill="#222222">0.241</text>
+<text x="210" y="439.0" text-anchor="end" font-size="12" fill="#222222">baseline_per_request</text>
+<rect x="220.0" y="412.0" width="203.6" height="16" fill="#4C78A8"/>
+<text x="428.6" y="424.0" text-anchor="start" font-size="10.5" fill="#222222">0.201</text>
+<rect x="220.0" y="432.0" width="202.5" height="16" fill="#F58518"/>
+<text x="427.5" y="444.0" text-anchor="start" font-size="10.5" fill="#222222">0.200</text>
+<rect x="560" y="38" width="11" height="11" fill="#4C78A8"/>
+<text x="576" y="48" font-size="11" fill="#222222">n=50</text>
+<rect x="560" y="53" width="11" height="11" fill="#F58518"/>
+<text x="576" y="63" font-size="11" fill="#222222">n=150</text>
+</svg>

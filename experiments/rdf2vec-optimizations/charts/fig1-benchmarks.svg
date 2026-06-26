@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="288" viewBox="0 0 780 288" font-family="Helvetica,Arial,sans-serif">
+<rect width="780" height="288" fill="white"/>
+<text x="390.0" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222222">Source benchmarks: records and clean gold pairs</text>
+<line x1="220.0" y1="74" x2="220.0" y2="242" stroke="#E6E6E6"/>
+<text x="220.0" y="260" text-anchor="middle" font-size="11" fill="#888888">0</text>
+<line x1="370.8" y1="74" x2="370.8" y2="242" stroke="#E6E6E6"/>
+<text x="370.8" y="260" text-anchor="middle" font-size="11" fill="#888888">2,000</text>
+<line x1="521.6" y1="74" x2="521.6" y2="242" stroke="#E6E6E6"/>
+<text x="521.6" y="260" text-anchor="middle" font-size="11" fill="#888888">4,000</text>
+<line x1="672.4" y1="74" x2="672.4" y2="242" stroke="#E6E6E6"/>
+<text x="672.4" y="260" text-anchor="middle" font-size="11" fill="#888888">6,000</text>
+<text x="465.0" y="280" text-anchor="middle" font-size="12" fill="#222222">count</text>
+<line x1="220.0" y1="74" x2="220.0" y2="242" stroke="#888888"/>
+<text x="210" y="103.0" text-anchor="end" font-size="12" fill="#222222">DynQALD</text>
+<rect x="220.0" y="76.0" width="135.1" height="16" fill="#4C78A8"/>
+<text x="360.1" y="88.0" text-anchor="start" font-size="10.5" fill="#222222">1,791</text>
+<rect x="220.0" y="96.0" width="135.1" height="16" fill="#54A24B"/>
+<text x="360.1" y="108.0" text-anchor="start" font-size="10.5" fill="#222222">1,791</text>
+<text x="210" y="159.0" text-anchor="end" font-size="12" fill="#222222">DynRuBQ</text>
+<rect x="220.0" y="132.0" width="302.4" height="16" fill="#4C78A8"/>
+<text x="527.4" y="144.0" text-anchor="start" font-size="10.5" fill="#222222">4,011</text>
+<rect x="220.0" y="152.0" width="302.3" height="16" fill="#54A24B"/>
+<text x="527.3" y="164.0" text-anchor="start" font-size="10.5" fill="#222222">4,009</text>
+<text x="210" y="215.0" text-anchor="end" font-size="12" fill="#222222">Total</text>
+<rect x="220.0" y="188.0" width="437.5" height="16" fill="#4C78A8"/>
+<text x="662.5" y="200.0" text-anchor="start" font-size="10.5" fill="#222222">5,802</text>
+<rect x="220.0" y="208.0" width="437.3" height="16" fill="#54A24B"/>
+<text x="662.3" y="220.0" text-anchor="start" font-size="10.5" fill="#222222">5,800</text>
+<rect x="560" y="38" width="11" height="11" fill="#4C78A8"/>
+<text x="576" y="48" font-size="11" fill="#222222">Records</text>
+<rect x="560" y="53" width="11" height="11" fill="#54A24B"/>
+<text x="576" y="63" font-size="11" fill="#222222">Clean gold pairs</text>
+</svg>

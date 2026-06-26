@@ -1,0 +1,9 @@
+{
+  "nodes_requested": 1310,
+  "depth": 2,
+  "triples": 173790,
+  "distinct_subjects": 5289,
+  "distinct_objects": 88026,
+  "d1_unique_objects": 24573,
+  "max_d2": 4000
+}
