@@ -1,0 +1,42 @@
+# CI for DynBench-Backend: lint + the existing utility/integration tests with a
+# coverage gate. Deployment (Docker build/push) stays in deploy_service.yml.
+# A full-app end-to-end test is not included because the service connects to
+# MongoDB and an LLM endpoint at import time (no offline boot).
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11", cache: pip }
+      - run: pip install ruff
+      - run: ruff check . || true   # advisory until pre-existing findings are cleaned up
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11", cache: pip }
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+      - name: Download NLTK data (punkt) for sentence tokenisation
+        run: python -c "import nltk; nltk.download('punkt'); nltk.download('punkt_tab')"
+      - name: Unit/integration tests with coverage gate
+        run: |
+          pytest tests --cov=utils --cov-report=term-missing --cov-report=xml \
+            --cov-fail-under=80 --junitxml=pytest-report.xml
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: coverage, path: coverage.xml, if-no-files-found: ignore }
