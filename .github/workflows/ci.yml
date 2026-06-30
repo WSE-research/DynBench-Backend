@@ -30,6 +30,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -r requirements-dev.txt
+      - name: Download NLTK data (punkt) for sentence tokenisation
+        run: python -c "import nltk; nltk.download('punkt'); nltk.download('punkt_tab')"
       - name: Unit/integration tests with coverage gate
         run: |
           pytest tests --cov=utils --cov-report=term-missing --cov-report=xml \
