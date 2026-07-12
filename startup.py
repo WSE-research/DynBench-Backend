@@ -74,6 +74,30 @@ def execute(query: str, delay=2.0, timeout=30.0,) -> dict | None:
     return raw_execute(query, WIKIDATA_ENDPOINT, WIKIDATA_AGENT, delay=delay, timeout=timeout)
 
 
+@cache.cache(using={'query', 'endpoint'})
+def execute_at(query: str, endpoint: str, delay=2.0, timeout=30.0) -> dict | None:
+    """Like execute(), but against a caller-provided SPARQL endpoint
+    (cached separately per endpoint)."""
+    return raw_execute(query, endpoint, WIKIDATA_AGENT, delay=delay, timeout=timeout)
+
+
+def make_execute(endpoint: str | None):
+    """Return a query-execution function for the given SPARQL endpoint.
+
+    Falls back to the default (Wikidata) execute() when no endpoint is given
+    or when it equals the configured Wikidata endpoint, so the existing cache
+    entries keep being used.
+    """
+    if not endpoint or endpoint.strip() in ('', WIKIDATA_ENDPOINT):
+        return execute
+    stripped = endpoint.strip()
+
+    def execute_on_endpoint(query: str, delay=2.0, timeout=30.0) -> dict | None:
+        return execute_at(query, stripped, delay=delay, timeout=timeout)
+
+    return execute_on_endpoint
+
+
 # @cache.cache(using={'url', 'model', 'prompt', 'temp', 'max_tokens'})
 # def call_LLM(url: str, key: str, model: str, prompt, temp: float=0.0, max_tokens: int=1000, timeout=30.0) -> dict | None:
 #     return raw_call_LLM(url, key, model, prompt, temp, max_tokens, timeout)
@@ -101,6 +125,17 @@ def call_LLM(url, model, prompt):
 
 def get_label(entity: str, lang: str='en') -> str:
     return get_wikidata_label(entity, execute, lang=lang)
+
+
+def make_get_label(exec_fn):
+    """Return a label-lookup function that uses the given execute function."""
+    if exec_fn is execute:
+        return get_label
+
+    def get_label_at(entity: str, lang: str='en') -> str:
+        return get_wikidata_label(entity, exec_fn, lang=lang)
+
+    return get_label_at
 
 
 logger.info(f'Cache contains {cache_collection.count_documents({})} records.')

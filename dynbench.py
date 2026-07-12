@@ -20,6 +20,8 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.responses import RedirectResponse
 
+from pyparsing import ParseException  # raised by rdflib's SPARQL parser
+
 from startup import feedback_collection, models_list, LANGUAGES
 
 from core import create_question_query # , detect_language
@@ -83,6 +85,11 @@ class TransformRequest(BaseModel):
     lang: str
     complexity: str = "normal"
     checks: list[str] | None
+    # optional SPARQL endpoint of the benchmark's knowledge graph; defaults to
+    # the configured Wikidata endpoint. NOTE: entity substitution candidates
+    # and PageRank are computed on Wikidata — for other knowledge graphs the
+    # endpoint is used for query execution (e.g. productivity checks).
+    endpoint: str | None = None
 
 
 class TransformResponse(BaseModel):
@@ -187,7 +194,8 @@ def transform_endpoint(request: TransformRequest) -> TransformResponse:
             request.model,
             request.lang,
             request.complexity,
-            request.checks
+            request.checks,
+            endpoint=request.endpoint,
         )
         
         if result is None:
@@ -215,10 +223,20 @@ def transform_endpoint(request: TransformRequest) -> TransformResponse:
             # extra=result["extra"]
         )
     
+    except ParseException as e:
+        # invalid SPARQL is a client error, not a server crash — report it as
+        # 400 with a clear message (e.g. Virtuoso-dialect aggregates like
+        # "SELECT DISTINCT COUNT(?x)" are not valid SPARQL 1.1)
+        logger.warning(f"Unparsable SPARQL in transform request: {e}")
+        raise HTTPException(
+            status_code=400,
+            detail=f"The SPARQL query could not be parsed (invalid SPARQL 1.1): {e}",
+        )
+
     except Exception as e:
         logger.error(f"Error in transform endpoint: {e} \n(request: {request})")
         raise HTTPException(status_code=500, detail=str(e))
-    
+
     finally:
         # Always release the lock so the endpoint becomes available again
         transform_lock.release()
