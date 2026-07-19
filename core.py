@@ -11,6 +11,7 @@ from utils.wikidata import check_productivity_single, WIKIDATA_PREFIX
 from utils.text import count_sentences, calc_levenshtein_dist
 
 from startup import call_LLM
+from startup import make_execute, make_get_label
 
 
 def detect_language(text: str, model: str) -> str | None:
@@ -63,7 +64,7 @@ def detect_language(text: str, model: str) -> str | None:
         return None
 
 
-def replace_entity(model: str, question: str, query: str, entity: str, new_entity: str, lang: str='en') -> tuple[str | None, str | None]:
+def replace_entity(model: str, question: str, query: str, entity: str, new_entity: str, lang: str='en', label_fn=None) -> tuple[str | None, str | None]:
     """
     Replace the entity in the question and query with a new entity.
 
@@ -77,8 +78,9 @@ def replace_entity(model: str, question: str, query: str, entity: str, new_entit
     Returns:
         Tuple of (new_query, new_question) or (None, None) if replacement failed.
     """
-    old_label= get_label(entity, lang=lang)
-    new_label= get_label(new_entity, lang=lang)
+    label_fn = label_fn or get_label
+    old_label= label_fn(entity, lang=lang)
+    new_label= label_fn(new_entity, lang=lang)
 
     if not old_label or not new_label:
         return None, None
@@ -179,7 +181,7 @@ def sort_replaces_by_complexity(replaces, complexity):
         raise ValueError(f'Complexity can only be easy/normal/hard/random. Got: {complexity}')
  
 
-def get_info(query: str) -> dict:
+def get_info(query: str, exec_fn=None) -> dict:
     """Get the information about the query.
         Triples: list of triples in the query.
         Resources: list of entities and predicates in the query.
@@ -194,6 +196,7 @@ def get_info(query: str) -> dict:
         Dictionary with information about the query.
     """
     info = {}
+    exec_fn = exec_fn or execute
     # Parse the SPARQL query to extract triples (subject-predicate-object patterns)
     info['triples'] = [i for i in parse_query(query) if all(i)]
     num_triples = len(info['triples'])
@@ -205,7 +208,7 @@ def get_info(query: str) -> dict:
     logger.debug(f'Extracted {num_resources} resource{"s" if num_resources != 1 else ""} from the query.')
 
     # Get types/properties for each resource in the query
-    info['types'] = get_resources_types(info, execute, PREDICATES)
+    info['types'] = get_resources_types(info, exec_fn, PREDICATES)
     logger.debug(f'Extracted entity properties.')
 
     # Extract conditions based on predicates defined in the info
@@ -217,7 +220,7 @@ def get_info(query: str) -> dict:
     logger.debug(f'Extracted query conditions.')
 
     # Find possible substitutes for each entity in the query
-    info['substitutes'] = find_substitutes(query, execute, info)
+    info['substitutes'] = find_substitutes(query, exec_fn, info)
     logger.debug(f'Extracted substitutes for entities.')
 
     # Flatten all substitution results and track the original entity
@@ -251,7 +254,7 @@ def get_info(query: str) -> dict:
     return info
 
 
-def create_question_query(query: str, question: str, model: str, lang: str, complexity: str, checks=None):
+def create_question_query(query: str, question: str, model: str, lang: str, complexity: str, checks=None, endpoint: str | None = None):
     """Create a new question and query by replacing one entity.
 
     Args:
@@ -260,6 +263,9 @@ def create_question_query(query: str, question: str, model: str, lang: str, comp
         model: Name of LLM model to use.
         lang: Language of the question ('en', 'de', 'fr', 'ru', 'uk').
         complexity: Complexity level ('easy', 'normal', 'hard', 'random').
+        endpoint: optional SPARQL endpoint of the knowledge graph to query
+            (defaults to the configured Wikidata endpoint). Note: entity
+            substitution candidates and PageRank are Wikidata-based.
         checks: checks to perform or None. If None, both checks are performed. Possible items:
             - sentence: check if number of sentences is same
             - levenstein: check original question vs back-transformed by Levenstein distance.
@@ -285,8 +291,11 @@ def create_question_query(query: str, question: str, model: str, lang: str, comp
         logger.error('Value error in create_question_query: checks must be of type tuple, list, set or None')
         return None
 
+    exec_fn = make_execute(endpoint)
+    label_fn = make_get_label(exec_fn)
+
     query = normal_sparql(query, WIKIDATA_PREFIX)
-    info = get_info(query)
+    info = get_info(query, exec_fn)
     
     extra['query_info'] = {
         'num_triples': len(info.get('triples', [])),
@@ -322,7 +331,7 @@ def create_question_query(query: str, question: str, model: str, lang: str, comp
             'Status': 'in progress'
         }
 
-        old_label = get_label(replace['old'], lang=lang)
+        old_label = label_fn(replace['old'], lang=lang)
         logger.info(f"Label for {replace['old']}: {old_label}")
         if not old_label:
             attempt['Status'] = 'failed'
@@ -331,7 +340,7 @@ def create_question_query(query: str, question: str, model: str, lang: str, comp
             continue
         attempt['Label for original entity'] = old_label
 
-        new_label = get_label(replace['new'], lang=lang)
+        new_label = label_fn(replace['new'], lang=lang)
         logger.info(f"Label for {replace['new']}: {new_label}")
         if not new_label:
             attempt['Status'] = 'failed'
@@ -340,7 +349,7 @@ def create_question_query(query: str, question: str, model: str, lang: str, comp
             continue
         attempt['Label for new entity'] = new_label
 
-        if not check_productivity_single(query, execute, replace):
+        if not check_productivity_single(query, exec_fn, replace):
             attempt['Status'] = 'failed'
             attempt['Failure reason'] = 'productivity check failed'
             extra['attempts'].append(attempt)
@@ -350,7 +359,7 @@ def create_question_query(query: str, question: str, model: str, lang: str, comp
         new_query = None
         try:
             logger.info(f'Replace {old_label} -> {new_label}.')
-            new_query, new_question = replace_entity(model, question, query, replace['old'], replace['new'], lang)
+            new_query, new_question = replace_entity(model, question, query, replace['old'], replace['new'], lang, label_fn=label_fn)
             if not new_question or not new_query:
                 logger.info(f'Cannot generate forward transformation.')
                 attempt['Status'] = 'Failed'
@@ -374,7 +383,7 @@ def create_question_query(query: str, question: str, model: str, lang: str, comp
                     continue
 
             logger.info(f'Back-transform {new_label} -> {old_label}.')
-            _, restored_question = replace_entity(model, new_question, new_query, replace['new'], replace['old'], old_language)
+            _, restored_question = replace_entity(model, new_question, new_query, replace['new'], replace['old'], old_language, label_fn=label_fn)
             restored_question = restored_question.strip(' ,\n\t') if restored_question else None
             logger.info(f'Back-transformed question: {restored_question}')
 
