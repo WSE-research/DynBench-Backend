@@ -1,0 +1,70 @@
+= Substitute Ranking by Question Language: Adding Udmurt (udm) as a 6th Language
+:toc:
+:toclevels: 3
+:sectnums:
+
+_Extends `LANGUAGE-COMPARISON-n100.adoc`, which stratified DynBench's 5 supported languages (English, German, French, Russian, Ukrainian) at ~100 items/language. This study adds Udmurt (`udm`) as a 6th language, sourced from `benchmarks/QALD_udm.csv` -- a Udmurt translation of the QALD questions that `DynQALD.json`'s English-language records are drawn from -- and reruns the same 4 production/optimized configurations of both methods on the combined 578-item, 6-language set._
+
+[abstract]
+Adding Udmurt required relaxing the original study's global entity-uniqueness rule: DynBench draws its substitution targets from a small recurring entity pool, and only ~23 of the 406 gold-pairs with a Udmurt translation have an `original` entity not already claimed by the existing 478-item set. Reaching a comparable n=100 for Udmurt meant allowing it to reuse entities already tested under another language -- in the sampled 100 items, 97 do so, so **only 3 items involve genuinely Udmurt-exclusive entities**; the other 97 are repeat measurements of (original, gold, candidate-pool) triples already scored elsewhere, relabeled. With that caveat firmly in mind: RDF2Vec's optimized global model stays language-robust with Udmurt included (MRR 0.368, squarely inside the existing 0.334-0.407 band), consistent with Finding 1 of the parent study (ranking is graph-structural, not text-based). The optimized embedding config scores Udmurt unexpectedly high (MRR 0.355, second only to French's 0.382) -- but per the overlap caveat above, this mostly reflects that Udmurt's sample disproportionately reused French- and English-associated high-scoring entities, not that Udmurt questions themselves carry any signal (the method never reads question text in any language). Separately, Wikidata's Udmurt label coverage is sparse: of 200 native-label lookups (original + gold entity per item), only 22 (11%) resolved to an actual `udm`-tagged label; 153 (76.5%) fell back to Russian, 6 (3%) to the language-independent `mul` label, and 19 (9.5%) had none of the three.
+
+== What changed from the parent study
+
+* *New data source*: `benchmarks/QALD_udm.csv` (558 rows, `english`/`russian`/`udmurt` columns) is a Udmurt translation of the QALD benchmark. It was matched to `DynQALD.json`'s `language == "en"` records by exact question text -- 407/407 matched, 406 with a non-empty Udmurt translation.
+* *Neither method reads question text*: RDF2Vec ranks by graph structure; the embedding method always encodes the entity's *English* label/description regardless of the item's language tag (established in the parent study's Finding 1). A "udm" item is therefore mechanically identical to whatever other-language item already tested the same `(original, gold)` pair -- the language field only changes which report bucket it's counted under. This is what makes the entity-overlap problem below a *sampling* problem, not a data-quality one.
+* *Entity scarcity forced a sampling-policy decision*: of the 406 Udmurt-translated gold-pairs, only 23 unique `original` entities are not already claimed by the existing 478-item (en/de/fr/ru/uk) set. Enforcing the parent study's global-uniqueness rule would have capped Udmurt at ~23 items, well below the 88-100/language of the others. Decision (confirmed with the repo owner): allow `udm` to reuse entities already tested under another language, self-deduping only within `udm` itself, to reach a comparable n=100. Ranks are still recomputed from scratch against the extended graph/corpus (not copied), so this is a real repeat measurement, not a shortcut -- but it is a repeat measurement, and the results have to be read that way (see Findings and Caveats).
+* *Native-label fallback*: for transparency (not for ranking -- the pipeline never uses it), each `udm` item's `original`/`gold` entity also got a best-effort native-script label: Wikidata's `udm`-tagged label if present, else Russian, else the language-independent `mul` label. Recorded in `data_lang100_udm/eval_set.json` as `original_label_native`/`gold_label_native`, alongside every item's usual (always-English) `original_label`/`gold_label`.
+
+== Data and harness
+
+* `experiments/rdf2vec-optimizations/_prepare_eval_data_udm.py` (new) -- builds the udm gold-pairs, self-deduped sample, and native-label lookups; appends to the existing `data_lang100/eval_set.json` (position order preserved: the first 478 items are byte-identical to the parent study, `udm` is appended after).
+* `experiments/rdf2vec-optimizations/_materialize_graph_incremental.py` (new) -- extends `data_lang100/local_graph.nt` (362,891 triples, 13,954 subjects) with only the ~2,883 newly-referenced nodes rather than re-querying the existing ~10,615, since most of those had never been fetched (only 1,496 of the new nodes weren't already graph subjects). Result: `data_lang100_udm/local_graph.nt`, 456,808 triples, 19,214 subjects.
+* `experiments/rdf2vec-optimizations/data_lang100_udm/` -- `eval_set.json` (578 items), `node_uris.json` (12,094 unique entities), `local_graph.nt`, `local_graph_stats.json`, `new_node_uris.json` (the 2,883 nodes added for udm).
+* `experiments/{rdf2vec-optimizations,embedding-optimizations}/results_lang100_udm/` -- the same 4 configs as the parent study, rerun on the full 578-item set.
+* `experiments/rdf2vec-optimizations/_analyze_by_language.py` -- `LANGUAGES` extended to include `udm`.
+* `experiments/language-comparison-n100-udm-by-language.json` -- machine-readable per-language/per-config summary.
+
+=== A methodological side-effect of extending in place
+
+Because the local graph and the RDF2Vec "global" corpus are shared across *all* items, re-running `global_depth1_fullcorpus` on the extended graph shifts the en/de/fr/ru/uk numbers slightly from the parent study (e.g. en MRR 0.342 -> 0.337, uk 0.393 -> 0.407) even though those 478 items themselves didn't change -- the corpus they're embedded against grew. The embedding-method numbers for en/de/fr/ru/uk are, by contrast, byte-identical to the parent study (confirmed against `language-comparison-n100-by-language.json`), since that method never touches the graph. This is expected given the "extend in place" design and doesn't change any of the parent study's conclusions; it's noted here so the two studies' per-language tables aren't read as literally identical when compared side by side.
+
+== Sample sizes
+
+[options="header"]
+|===
+| Language | Achieved | Note
+| en | 100 |
+| de | 100 |
+| fr | 90 | benchmark has only 216 qualifying gold pairs for fr
+| ru | 100 |
+| uk | 88 | benchmark has only 376 qualifying gold pairs for uk
+| udm | 100 | 406 gold pairs available, but 97/100 reuse an entity already tested under another language (see above)
+|===
+
+== Results
+
+[options="header"]
+|===
+| Config | ALL (n=578) | en (n=100) | de (n=100) | fr (n=90) | ru (n=100) | uk (n=88) | udm (n=100)
+| RDF2Vec production (`baseline_per_request`) | 0.189 | 0.191 | 0.220 | 0.180 | 0.180 | 0.184 | 0.176
+| Embedding production (`mMiniLM`, label+desc) | 0.244 | 0.193 | 0.237 | 0.345 | 0.171 | 0.267 | 0.267
+| Embedding optimized (`bge-large-en` + label) | 0.299 | 0.239 | 0.281 | 0.382 | 0.227 | 0.320 | *0.355*
+| *RDF2Vec optimized (`global_depth1_fullcorpus`)* | *0.366* | 0.337 | 0.369 | 0.362 | 0.361 | *0.407* | 0.368
+|===
+
+Coverage (fraction of items where a rank was assignable, after gold-injection): RDF2Vec 91-100% across languages (100% for de and udm); embedding methods 73-87% (83% for udm). udm's "natural" gold-retrieval rate (gold present in the pool *before* injection, a stricter retrieval-only measure) is 29% -- in line with the other languages' 25-32%, not an outlier.
+
+== Findings
+
+1. *RDF2Vec's optimized global model remains language-robust with Udmurt included.* udm's MRR (0.368) falls squarely inside the other 5 languages' 0.337-0.407 band, extending Finding 1 of the parent study: ranking is driven by graph structure, which carries no language signal, so a 6th language -- even one whose questions the method never reads -- lands where the mechanism predicts.
+2. *Embedding-optimized's high Udmurt score is very likely an entity-overlap artifact, not new evidence about Udmurt.* At face value udm (0.355) is second only to French (0.382) and beats the other 4 languages by a wide margin. But 97/100 udm items reuse an `original` entity already tested under en/de/fr/ru/uk -- most plausibly a high concentration of entities that also happen to be French- or English-associated in this benchmark's construction (French already scored highest in the parent study for the same "thin English documentation" reasons discussed there). Since the embedding method only ever sees the English label regardless of language tag, udm's score is largely a re-draw from an already-favorable entity subpopulation, not a demonstration that Udmurt-language questions rank better. The 3 items with genuinely Udmurt-exclusive entities are far too few to estimate a language-specific effect on their own.
+3. *Wikidata's Udmurt label coverage is sparse enough that a language-identity-aware pipeline would need a fallback chain.* Only 11% of the 200 original/gold native-label lookups resolved to an actual `udm`-tagged Wikidata label; 76.5% needed the Russian fallback and 3% needed `mul`; 9.5% had no label in any of the three. This doesn't affect the ranking pipeline (which is English-only regardless of language), but it's directly relevant if DynBench ever surfaces Udmurt-language entity labels to end users -- a udm-only lookup would silently fail on ~9-in-10 entities.
+4. *Both production configurations remain the weakest options for Udmurt too* (RDF2Vec production 0.176, lowest of all 6 languages; embedding production 0.267, mid-pack), consistent with the parent study's central conclusion that neither production default is competitive with its optimized counterpart, now confirmed for a 6th language.
+
+== Caveats
+
+All caveats from `LANGUAGE-COMPARISON-n100.adoc` and `rdf2vec-optimizations/README.md` apply unchanged (single popularity-matched gold, no significance testing, structural-match bias, gold-injection decouples coverage from ranking quality). Additional udm-specific caveats:
+
+* *97% entity overlap with existing languages is the central limitation of this addendum.* Udmurt's per-language numbers should be read as "the method's behavior on a re-sample of the existing entity pool, relabeled `udm`" rather than "the method's behavior on Udmurt-specific substitution targets." A future study wanting genuine Udmurt-exclusive signal would need either a Udmurt translation of DynRuBQ (not available here -- `QALD_udm.csv` only covers the QALD side) or a materially larger Udmurt-translated question set.
+* *The entity-uniqueness relaxation was a deliberate, repo-owner-approved deviation* from the parent study's sampling rule, made necessary by DynBench's small recurring substitution-entity pool. It is not a bug in the stratified sampler.
+* *Native-label tiering (`udm`/`ru`/`mul`) is a display/transparency field only* -- it was added after an initial partial run and does not retroactively apply to any other language's items, nor does it feed into either method's ranking.

@@ -1,0 +1,11 @@
+{
+  "nodes_requested": 12094,
+  "depth": 2,
+  "triples": 456808,
+  "distinct_subjects": 19214,
+  "distinct_objects": 210114,
+  "d1_unique_objects": 15648,
+  "max_d2": 4000,
+  "incremental_from": "/home/alex/repos/DynBench-Backend/experiments/rdf2vec-optimizations/data_lang100/local_graph.nt",
+  "new_nodes_fetched": 1496
+}

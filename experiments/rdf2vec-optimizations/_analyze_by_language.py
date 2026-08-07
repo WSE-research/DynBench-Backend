@@ -20,7 +20,7 @@ import json
 import sys
 from pathlib import Path
 
-LANGUAGES = ["en", "de", "fr", "ru", "uk"]
+LANGUAGES = ["en", "de", "fr", "ru", "uk", "udm"]
 
 
 def metrics_for(per_item):
