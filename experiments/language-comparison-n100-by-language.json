@@ -1,0 +1,160 @@
+{
+  "eval_set": "experiments/rdf2vec-optimizations/data_lang100/eval_set.json",
+  "languages": [
+    "en",
+    "de",
+    "fr",
+    "ru",
+    "uk"
+  ],
+  "configs": {
+    "model__mMiniLM_baseline": {
+      "result_file": "experiments/embedding-optimizations/results_lang100/model__mMiniLM_baseline.json",
+      "mode": "mMiniLM",
+      "repeats": 1,
+      "by_language": {
+        "ALL": {
+          "n": 478,
+          "MRR": 0.24,
+          "coverage": 0.776
+        },
+        "en": {
+          "n": 100,
+          "MRR": 0.193,
+          "coverage": 0.73
+        },
+        "de": {
+          "n": 100,
+          "MRR": 0.237,
+          "coverage": 0.77
+        },
+        "fr": {
+          "n": 90,
+          "MRR": 0.345,
+          "coverage": 0.867
+        },
+        "ru": {
+          "n": 100,
+          "MRR": 0.171,
+          "coverage": 0.75
+        },
+        "uk": {
+          "n": 88,
+          "MRR": 0.267,
+          "coverage": 0.773
+        }
+      }
+    },
+    "tmpl__bgeLargeEn_label": {
+      "result_file": "experiments/embedding-optimizations/results_lang100/tmpl__bgeLargeEn_label.json",
+      "mode": "bgeLargeEn",
+      "repeats": 1,
+      "by_language": {
+        "ALL": {
+          "n": 478,
+          "MRR": 0.287,
+          "coverage": 0.776
+        },
+        "en": {
+          "n": 100,
+          "MRR": 0.239,
+          "coverage": 0.73
+        },
+        "de": {
+          "n": 100,
+          "MRR": 0.281,
+          "coverage": 0.77
+        },
+        "fr": {
+          "n": 90,
+          "MRR": 0.382,
+          "coverage": 0.867
+        },
+        "ru": {
+          "n": 100,
+          "MRR": 0.227,
+          "coverage": 0.75
+        },
+        "uk": {
+          "n": 88,
+          "MRR": 0.32,
+          "coverage": 0.773
+        }
+      }
+    },
+    "baseline_per_request": {
+      "result_file": "experiments/rdf2vec-optimizations/results_lang100/baseline_per_request.json",
+      "mode": "per_request",
+      "repeats": 5,
+      "by_language": {
+        "ALL": {
+          "n": 478,
+          "MRR": 0.188,
+          "coverage": 0.895
+        },
+        "en": {
+          "n": 100,
+          "MRR": 0.187,
+          "coverage": 0.93
+        },
+        "de": {
+          "n": 100,
+          "MRR": 0.22,
+          "coverage": 0.92
+        },
+        "fr": {
+          "n": 90,
+          "MRR": 0.166,
+          "coverage": 0.844
+        },
+        "ru": {
+          "n": 100,
+          "MRR": 0.173,
+          "coverage": 0.9
+        },
+        "uk": {
+          "n": 88,
+          "MRR": 0.196,
+          "coverage": 0.875
+        }
+      }
+    },
+    "global_depth1_fullcorpus": {
+      "result_file": "experiments/rdf2vec-optimizations/results_lang100/global_depth1_fullcorpus.json",
+      "mode": "global",
+      "repeats": 5,
+      "by_language": {
+        "ALL": {
+          "n": 478,
+          "MRR": 0.355,
+          "coverage": 0.895
+        },
+        "en": {
+          "n": 100,
+          "MRR": 0.342,
+          "coverage": 0.93
+        },
+        "de": {
+          "n": 100,
+          "MRR": 0.351,
+          "coverage": 0.92
+        },
+        "fr": {
+          "n": 90,
+          "MRR": 0.36,
+          "coverage": 0.844
+        },
+        "ru": {
+          "n": 100,
+          "MRR": 0.334,
+          "coverage": 0.9
+        },
+        "uk": {
+          "n": 88,
+          "MRR": 0.393,
+          "coverage": 0.875
+        }
+      }
+    }
+  }
+}

@@ -36,6 +36,8 @@ DEPTH = int(os.environ.get("MAT_DEPTH", "2"))
 D1_LIMIT = int(os.environ.get("MAT_D1_LIMIT", "500"))
 D2_LIMIT = int(os.environ.get("MAT_D2_LIMIT", "200"))
 MAX_D2 = int(os.environ.get("MAT_MAX_D2", "4000"))
+QUERY_TIMEOUT = float(os.environ.get("MAT_QUERY_TIMEOUT", "30.0"))
+QUERY_DELAY = float(os.environ.get("MAT_QUERY_DELAY", "0.3"))
 
 DATA = Path(__file__).parent / os.environ.get("EXP_DATA_DIR", "data")
 ENTITY_NS = "http://www.wikidata.org/entity/Q"
@@ -59,7 +61,7 @@ def edges_of(node_short, execute, limit):
 
 def main():
     nodes = json.load(open(DATA / "node_uris.json", encoding="utf-8"))
-    raw = partial(raw_execute, endpoint_url=LIVE_ENDPOINT, agent=LIVE_AGENT, delay=0.3, timeout=30.0)
+    raw = partial(raw_execute, endpoint_url=LIVE_ENDPOINT, agent=LIVE_AGENT, delay=QUERY_DELAY, timeout=QUERY_TIMEOUT)
     execute = make_caching_execute(raw, {}, max_size=200000)
 
     triples = set()
