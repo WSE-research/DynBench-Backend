@@ -307,7 +307,7 @@ def create_question_query(query: str, question: str, model: str, lang: str, comp
     extra['detected_language'] = old_language
     
     if checks is None:
-        checks = {}
+        checks = {'sentence', 'levenstein', }
     elif isinstance(checks, (tuple, list)):
         checks = set(checks)
     elif not isinstance(checks, set):
