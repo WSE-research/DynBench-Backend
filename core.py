@@ -167,11 +167,11 @@ def sort_replaces_by_complexity(replaces, complexity):
         ValueError: If complexity is not one of the valid options.
     """
     if complexity == 'easy':
-        return sorted(replaces, key=lambda x: x[1])  # easy
+        return sorted(replaces, key=lambda x: x[1], reverse=True)  # easy
     elif complexity == 'normal':
         return sorted(replaces, key=lambda x: abs(x[0]-x[1]))  # normal
     elif complexity == 'hard':
-        return sorted(replaces, key=lambda x: x[1], reverse=True)  # hard
+        return sorted(replaces, key=lambda x: x[1])  # hard
     elif complexity == 'random':
         shuffled = replaces.copy()
         random.shuffle(shuffled)
