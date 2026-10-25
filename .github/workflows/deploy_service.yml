@@ -3,7 +3,9 @@ name: Docker Image CI
 env:
   DOCKER_IMAGE_NAME: dynbench-frontend
 
-on: push
+on: 
+  push:
+  workflow_dispatch:
 
 jobs:
   build:
